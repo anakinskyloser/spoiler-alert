@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spoiler Alert — Movies, spoiled on purpose.</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        bg: '#14171c',
+                        panel: '#1c2128',
+                        'panel-hover': '#252b35',
+                        border: '#2c3440',
+                        text: '#c3ccd6',
+                        muted: '#7d8896',
+                        brandBlue: '#5b8db8',
+                        brandPink: '#e0769f',
+                        brandAmber: '#e8b553',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['DM Sans', 'sans-serif'],
+                        mono: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Oswald:wght@500;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+    
+    
+    <style>
+        /* Custom Styles & Film Grain */
+        body {
+            background-color: #14171c;
+            color: #c3ccd6;
+            font-family: 'DM Sans', sans-serif;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Film grain overlay using SVG background */
+        .film-grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Ticket Notch styling */
+        .ticket-notch-left {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+        
+        .spoiler-text {
+            filter: blur(8px);
+            transition: filter 0.3s ease, background 0.3s ease;
+            user-select: none;
+            cursor: pointer;
+        }
+        
+        .spoiler-text.revealed {
+            filter: blur(0);
+            user-select: text;
+        }
+
+        /* Custom scrollbars for horizontal lists */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <div class="film-grain"></div>
+
+    <!-- STICKY HEADER -->
+    <header class="sticky top-0 z-50 bg-bg/90 backdrop-blur-md border-b border-border transition-colors duration-200">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Header Logo (SVG) -->
+            <a href="#home" class="group flex flex-col items-center justify-center transition-transform hover:scale-105" aria-label="Spoiler Alert Home">
+                <svg width="68" height="24" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg" class="drop-shadow">
+                    <circle cx="28" cy="20" r="16" fill="#5b8db8" fill-opacity="0.75" style="mix-blend-mode: screen;" />
+                    <circle cx="50" cy="20" r="16" fill="#e0769f" fill-opacity="0.75" style="mix-blend-mode: screen;" />
+                    <circle cx="72" cy="20" r="16" fill="#e8b553" fill-opacity="0.75" style="mix-blend-mode: screen;" />
+                </svg>
+                <span class="font-black text-xs md:text-sm tracking-wider text-white lowercase font-sans mt-0.5">spoileralert</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="flex items-center space-x-6 text-sm font-semibold tracking-wide">
+                <button onclick="navigateToHash('#home')" class="nav-link text-white hover:text-brandBlue transition-colors py-1 border-b-2 border-transparent">Films</button>
+                <button onclick="navigateToHash('#diary')" class="nav-link text-muted hover:text-brandPink transition-colors py-1 border-b-2 border-transparent">Diary</button>
+                <button onclick="navigateToHash('#lists')" class="nav-link text-muted hover:text-brandAmber transition-colors py-1 border-b-2 border-transparent">Lists</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER FOR SINGLE-PAGE ROUTING -->
+    <main id="app-content" class="flex-grow max-w-6xl w-full mx-auto px-4 py-8">
+        <!-- Content injected dynamically by Router -->
+    </main>
+
+    <!-- GLOBAL FOOTER -->
+    <footer class="border-t border-border bg-panel py-12 mt-16">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-8">
+            <!-- Footer Branding -->
+            <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                <a href="#home" class="flex flex-col items-center md:items-start group mb-3">
+                    <svg width="50" height="18" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="28" cy="20" r="16" fill="#5b8db8" fill-opacity="0.75" style="mix-blend-mode: screen;" />
+                        <circle cx="50" cy="20" r="16" fill="#e0769f" fill-opacity="0.75" style="mix-blend-mode: screen;" />
+                        <circle cx="72" cy="20" r="16" fill="#e8b553" fill-opacity="0.75" style="mix-blend-mode: screen;" />
+                    </svg>
+                    <span class="font-black text-xs tracking-wider text-white lowercase font-sans mt-1">spoileralert</span>
+                </a>
+                <p class="text-xs text-muted max-w-xs">Deconstructing cinema to unpack practical wisdom for everyday life. No plot left unspoiled.</p>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto px-4 mt-8 pt-6 border-t border-border/50 text-center text-xs text-muted">
+            &copy; <span id="current-year"></span> Spoiler Alert. Inspired by Letterboxd. Built for deep thinkers.
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /**
+         * ====================================================================
+         * CONFIGURATION & DATA SOURCE
+         * Edit entries, image paths, video embeds, and Formspree URL here.
+         * ====================================================================
+         */
+
+        // Formspree Endpoint for Newsletter
+        const FORMSPREE_URL = "https://formspree.io/f/xaeevepg";
+
+        /**
+         * BLOG ENTRIES DATASET
+         * Edit entries, text content, image paths, and video embeds here.
+         */
+        const GWH_INFOGRAPHIC = `<figure class="my-10 space-y-3"><figcaption class="flex items-center justify-between text-xs font-mono text-muted"><span class="text-brandAmber font-bold uppercase tracking-wider">Infographic Poster</span><span>A3 &middot; Mastering Retention &amp; Deep Learning</span></figcaption><div class="overflow-x-auto rounded-xl border border-border shadow-2xl bg-black"><div class="infographic-frame" style="position:relative;width:max(100%, 760px);aspect-ratio:1123/1587;overflow:hidden"><div class="infographic-poster" role="group" aria-label="Infographic poster: Mastering Retention and Deep Learning" style="position:absolute;top:0;left:0;width:1123px;height:1587px;transform-origin:top left"><div style="width: 1123px; height: 1587px; box-sizing: border-box; padding: 48px; background: #1f2c2b; color: #f2efe4; font-family: 'Source Serif 4', Georgia, serif; display: flex; flex-direction: column; gap: 18px; overflow: hidden">
+
+<!-- HEADER -->
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<div style="font-family: Oswald, sans-serif; font-weight: 500; font-size: 16px; letter-spacing: 0.22em; color: #e9c46a">AN ESSAY ON GOOD WILL HUNTING &middot; 4 LESSONS &middot; 1 ROUTINE</div>
+<div aria-hidden="true" style="font-family: Caveat, cursive; font-weight: 600; font-size: 28px; color: #cfcdc0">F(ω) = ∫ f(t) e^(−iωt) dt</div>
+</div>
+<div role="heading" aria-level="2" style="margin: 0; font-family: Oswald, sans-serif; font-weight: 700; font-size: 92px; line-height: 1.02; text-transform: uppercase; letter-spacing: 0.01em; color: #f2efe4">Mastering Retention<br>and Deep Learning</div>
+<div style="height: 3px; background: #e9c46a; width: 220px"></div>
+</div>
+
+<!-- HOOK -->
+<div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 36px; align-items: center; height: 165px; border-bottom: 1.5px solid rgba(242,239,228,0.35); padding-bottom: 18px; box-sizing: border-box">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div>
+<div style="display: flex; justify-content: space-between; font-family: Oswald, sans-serif; font-size: 18px; letter-spacing: 0.04em"><span>THE EDUCATION</span><span style="font-weight: 700">$150,000</span></div>
+<div style="height: 22px; background: #cfcdc0; margin-top: 4px"></div>
+</div>
+<div>
+<div style="display: flex; justify-content: space-between; font-family: Oswald, sans-serif; font-size: 18px; letter-spacing: 0.04em"><span>LIBRARY LATE FEES</span><span style="font-weight: 700; color: #e9c46a">$1.50</span></div>
+<div style="height: 22px; width: 6px; background: #e9c46a; margin-top: 4px"></div>
+</div>
+<div style="font-family: Caveat, cursive; font-weight: 600; font-size: 28px; color: #e9c46a; line-height: 1">100,000× the price, same access to the books.</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 33px; line-height: 1.12; text-transform: uppercase">Access to information is cheap. Retention costs vulnerability.</div>
+<div style="font-size: 16px; line-height: 1.4; color: #cfcdc0">Will can solve graduate-level problems on a hallway chalkboard, yet can't apply what he knows to his own life.</div>
+</div>
+</div>
+
+<!-- FOUR PANELS -->
+<div style="flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 18px">
+
+<div style="background: #2a3b3a; border: 1.5px solid rgba(242,239,228,0.4); border-radius: 6px; padding: 20px 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; min-height: 0">
+<div style="display: flex; align-items: center; gap: 14px">
+<div style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 52px; line-height: 1; color: #e9c46a">01</div>
+<div style="flex: 1; font-family: Oswald, sans-serif; font-weight: 700; font-size: 25px; line-height: 1.1; text-transform: uppercase">Active Retrieval vs. Passive Consumption</div>
+<svg aria-hidden="true" width="44" height="44" viewBox="0 0 48 48" fill="none" stroke="#e9c46a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 24a16 16 0 0 1 28-10"/><path d="M38 6v9h-9"/><path d="M40 24a16 16 0 0 1-28 10"/><path d="M10 42v-9h9"/></svg>
+</div>
+<div style="font-size: 16px; line-height: 1.45">Will argues with books and tests them against reality. Re-reading creates a false sense of competence; recall forces your brain to rebuild the pathway.</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: auto">
+<div style="border: 1.5px dashed #f0907a; padding: 8px 10px"><div style="font-family: Oswald, sans-serif; font-size: 13px; letter-spacing: 0.14em; color: #f0907a">NOT THIS</div><div style="font-size: 16px; line-height: 1.3">Re-reading and highlighting</div></div>
+<div style="border: 1.5px solid #8fc1d9; padding: 8px 10px"><div style="font-family: Oswald, sans-serif; font-size: 13px; letter-spacing: 0.14em; color: #8fc1d9">THIS</div><div style="font-size: 16px; line-height: 1.3">Active recall, no peeking</div></div>
+</div>
+</div>
+
+<div style="background: #2a3b3a; border: 1.5px solid rgba(242,239,228,0.4); border-radius: 6px; padding: 20px 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; min-height: 0">
+<div style="display: flex; align-items: center; gap: 14px">
+<div style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 52px; line-height: 1; color: #e9c46a">02</div>
+<div style="flex: 1; font-family: Oswald, sans-serif; font-weight: 700; font-size: 25px; line-height: 1.1; text-transform: uppercase">The Feynman Technique in a Boston Bar</div>
+<svg aria-hidden="true" width="44" height="44" viewBox="0 0 48 48" fill="none" stroke="#e9c46a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h36v24H21l-9 9v-9H6z"/><path d="M14 17h20M14 24h12"/></svg>
+</div>
+<div style="font-size: 16px; line-height: 1.45">Will dismantles a grad student's recycled argument from memory. If you can't explain a topic simply to a friend, you've memorized words, not retained it.</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: auto">
+<div style="border: 1.5px dashed #f0907a; padding: 8px 10px"><div style="font-family: Oswald, sans-serif; font-size: 13px; letter-spacing: 0.14em; color: #f0907a">NOT THIS</div><div style="font-size: 16px; line-height: 1.3">Memorized words</div></div>
+<div style="border: 1.5px solid #8fc1d9; padding: 8px 10px"><div style="font-family: Oswald, sans-serif; font-size: 13px; letter-spacing: 0.14em; color: #8fc1d9">THIS</div><div style="font-size: 16px; line-height: 1.3">Reframed in simple terms</div></div>
+</div>
+</div>
+
+<div style="background: #2a3b3a; border: 1.5px solid rgba(242,239,228,0.4); border-radius: 6px; padding: 20px 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; min-height: 0">
+<div style="display: flex; align-items: center; gap: 14px">
+<div style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 52px; line-height: 1; color: #e9c46a">03</div>
+<div style="flex: 1; font-family: Oswald, sans-serif; font-weight: 700; font-size: 25px; line-height: 1.1; text-transform: uppercase">Experiential Anchoring: The Park Bench</div>
+<svg aria-hidden="true" width="44" height="44" viewBox="0 0 48 48" fill="none" stroke="#e9c46a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="9" r="4"/><path d="M24 13v28"/><path d="M15 22h18"/><path d="M8 31a16 16 0 0 0 32 0"/></svg>
+</div>
+<div style="font-size: 16px; line-height: 1.45">Sean Maguire's point: books can't tell you what the Sistine Chapel smells like. Tie abstract ideas to real, emotional experience to lock them into long-term memory.</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: auto">
+<div style="border: 1.5px dashed #f0907a; padding: 8px 10px"><div style="font-family: Oswald, sans-serif; font-size: 13px; letter-spacing: 0.14em; color: #f0907a">NOT THIS</div><div style="font-size: 16px; line-height: 1.3">Facts in isolation</div></div>
+<div style="border: 1.5px solid #8fc1d9; padding: 8px 10px"><div style="font-family: Oswald, sans-serif; font-size: 13px; letter-spacing: 0.14em; color: #8fc1d9">THIS</div><div style="font-size: 16px; line-height: 1.3">Ideas tied to lived moments</div></div>
+</div>
+</div>
+
+<div style="background: #2a3b3a; border: 1.5px solid rgba(242,239,228,0.4); border-radius: 6px; padding: 20px 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; min-height: 0">
+<div style="display: flex; align-items: center; gap: 14px">
+<div style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 52px; line-height: 1; color: #e9c46a">04</div>
+<div style="flex: 1; font-family: Oswald, sans-serif; font-weight: 700; font-size: 25px; line-height: 1.1; text-transform: uppercase">Breaking Through Cognitive Defenses</div>
+<svg aria-hidden="true" width="44" height="44" viewBox="0 0 48 48" fill="none" stroke="#e9c46a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5l15 6v12c0 9-6 16-15 20C15 39 9 32 9 23V11z"/><path d="M17 24l5 5 9-10"/></svg>
+</div>
+<div style="font-size: 16px; line-height: 1.45">Will used obscure facts as armor. Saved articles and bookmarks feel productive but skip the hard work. Drop the armor and wrestle with the difficult idea.</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: auto">
+<div style="border: 1.5px dashed #f0907a; padding: 8px 10px"><div style="font-family: Oswald, sans-serif; font-size: 13px; letter-spacing: 0.14em; color: #f0907a">NOT THIS</div><div style="font-size: 16px; line-height: 1.3">Collecting bookmarks</div></div>
+<div style="border: 1.5px solid #8fc1d9; padding: 8px 10px"><div style="font-family: Oswald, sans-serif; font-size: 13px; letter-spacing: 0.14em; color: #8fc1d9">THIS</div><div style="font-size: 16px; line-height: 1.3">Wrestling with hard ideas</div></div>
+</div>
+</div>
+
+</div>
+
+<!-- BRIDGE -->
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; height: 165px">
+<div style="border-top: 3px solid #e9c46a; padding-top: 12px; display: flex; flex-direction: column; gap: 8px">
+<div style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 25px; text-transform: uppercase">Answering ≠ Using</div>
+<div style="font-size: 16px; line-height: 1.4; color: #cfcdc0">After each chapter, link the new concept to a concrete example:</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<div style="border: 1.5px solid rgba(242,239,228,0.5); padding: 7px 9px; font-size: 16px; line-height: 1.25">Where it shows up in daily life</div>
+<div style="border: 1.5px solid rgba(242,239,228,0.5); padding: 7px 9px; font-size: 16px; line-height: 1.25">Why it matters</div>
+<div style="border: 1.5px solid rgba(242,239,228,0.5); padding: 7px 9px; font-size: 16px; line-height: 1.25">Where it doesn't apply</div>
+</div>
+</div>
+<div style="border-top: 3px solid #e9c46a; padding-top: 12px; display: flex; flex-direction: column; gap: 8px">
+<div style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 25px; text-transform: uppercase">Smart ≠ Mature</div>
+<div style="font-size: 16px; line-height: 1.45">Talent can't make hard decisions or repair relationships for you. Be willing to say</div>
+<div style="font-family: Caveat, cursive; font-weight: 600; font-size: 30px; line-height: 1; color: #e9c46a">“I do not understand this yet.”</div>
+<div style="font-size: 16px; line-height: 1.3; color: #cfcdc0">Mentors, classmates and friends challenge what solitary reading can't.</div>
+</div>
+</div>
+
+<!-- ROUTINE -->
+<div style="height: 195px; display: flex; flex-direction: column; gap: 10px; border-top: 1.5px solid rgba(242,239,228,0.35); padding-top: 14px; box-sizing: border-box">
+<div style="font-family: Oswald, sans-serif; font-weight: 700; font-size: 25px; text-transform: uppercase; letter-spacing: 0.04em">A simple routine, inspired by the film</div>
+<div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="width: 34px; height: 34px; border-radius: 50%; background: #e9c46a; color: #1f2c2b; font-family: Oswald, sans-serif; font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: center">1</div><div style="font-size: 16px; line-height: 1.3">Study a small section</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="width: 34px; height: 34px; border-radius: 50%; background: #e9c46a; color: #1f2c2b; font-family: Oswald, sans-serif; font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: center">2</div><div style="font-size: 16px; line-height: 1.3">Close the material</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="width: 34px; height: 34px; border-radius: 50%; background: #e9c46a; color: #1f2c2b; font-family: Oswald, sans-serif; font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: center">3</div><div style="font-size: 16px; line-height: 1.3">Write down what you remember</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="width: 34px; height: 34px; border-radius: 50%; background: #e9c46a; color: #1f2c2b; font-family: Oswald, sans-serif; font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: center">4</div><div style="font-size: 16px; line-height: 1.3">Explain the main idea in your own words</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="width: 34px; height: 34px; border-radius: 50%; background: #e9c46a; color: #1f2c2b; font-family: Oswald, sans-serif; font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: center">5</div><div style="font-size: 16px; line-height: 1.3">Return later and test yourself again</div></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="width: 34px; height: 34px; border-radius: 50%; background: #e9c46a; color: #1f2c2b; font-family: Oswald, sans-serif; font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: center">6</div><div style="font-size: 16px; line-height: 1.3">Use the gaps to choose what to review</div></div>
+</div>
+<div style="display: flex; align-items: center; gap: 10px; margin-top: auto">
+<svg aria-hidden="true" width="26" height="18" viewBox="0 0 26 18" fill="none" stroke="#e9c46a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 9H3M9 3L3 9l6 6"/></svg>
+<div style="flex: 1; height: 0; border-top: 2px dashed rgba(233,196,106,0.7)"></div>
+<div style="font-family: Caveat, cursive; font-weight: 600; font-size: 26px; line-height: 1; color: #e9c46a">repeat: each gap becomes the next thing to learn</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<div style="font-size: 17px; line-height: 1.4; font-style: italic; color: #f2efe4; border-top: 1.5px solid rgba(242,239,228,0.35); padding-top: 12px; height: 56px; box-sizing: border-box">The goal isn't Will's extraordinary memory. It's being more thoughtful about what you learn, how you apply it, and how willing you are to let new experiences change your understanding.</div>
+
+</div></div></div></div></figure>`;
+
+        const BLOG_ENTRIES = [
+            {
+                id: "film-1",
+                title: "5 Healthy Habits to Transform Your Routine",
+                filmTitle: "Captain America: The First Avenger",
+                year: 2011,
+                runtime: "5 min read",
+                category: "Habits & Routine",
+                rating: 5.0,
+                watched: true,
+                liked: true,
+                rewatched: true,
+                posterImg: "",
+                svgFallback: `
+                    <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="cap-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0f172a"/>
+                                <stop offset="50%" stop-color="#1e293b"/>
+                                <stop offset="100%" stop-color="#450a0a"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#cap-bg)"/>
+                        <circle cx="150" cy="200" r="110" fill="none" stroke="#dc2626" stroke-width="16"/>
+                        <circle cx="150" cy="200" r="82" fill="none" stroke="#f8fafc" stroke-width="16"/>
+                        <circle cx="150" cy="200" r="54" fill="none" stroke="#2563eb" stroke-width="16"/>
+                        <polygon points="150,162 161,192 193,192 167,211 177,241 150,222 123,241 133,211 107,192 139,192" fill="#ffffff"/>
+                        <text x="150" y="380" font-family="'Playfair Display', serif" font-weight="800" font-size="20" fill="#ffffff" text-anchor="middle" letter-spacing="3">CAPTAIN AMERICA</text>
+                        <text x="150" y="405" font-family="sans-serif" font-weight="600" font-size="10" fill="#94a3b8" text-anchor="middle" letter-spacing="4">THE FIRST AVENGER</text>
+                    </svg>
+                `,
+                fallbackGradient: "from-blue-900 via-slate-900 to-red-950",
+                tags: ["consistency", "discipline", "mindset", "health"],
+                spoiler: "Steve Rogers doesn't gain supernatural drive from the super-soldier serum; the serum simply amplifies the unyielding grit, integrity, and daily habit of showing up he possessed when he was a 90-pound kid from Brooklyn.",
+                content: `
+                    <p class="lead text-lg text-white font-serif">Before the serum, Steve Rogers was a skinny kid who kept showing up. That is habit one: consistency beats raw talent every single day.</p>
+                    <p>When we analyze <em>Captain America: The First Avenger</em>, we often focus on the miraculous physical transformation inside Dr. Erskine’s chamber. But cinema tricks us into believing in instant breakthroughs. The true power of Steve Rogers was forged long before the lab in Brooklyn—it was built in the grueling daily discipline of refusing to stay down, even when outmatched and exhausted.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">1. The Habit of Showing Up (No Matter Your Size)</h3>
+                    <p>Rogers attempted to enlist five separate times in five different cities. He forged documents, hid medical conditions, and endured humiliating rejections for asthma, heart murmurs, and small stature. Yet he kept lining up in recruitment offices. Healthy physical and mental habits operate on the exact same mechanics: showing up to the gym, the desk, or the kitchen counter even when your present capabilities feel hopelessly inadequate.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">2. Diving on the Grenade (Micro-Sacrifices)</h3>
+                    <p>During basic training at Camp Lehigh, Colonel Phillips throws a dummy grenade to test the recruits. While the physically elite soldiers dive for cover, Rogers throws his frail body directly onto the explosive to save everyone else. Real health transformation requires diving on micro-grenades daily: sacrificing cheap dopamine, stepping away from late-night screens, and embracing short-term discomfort for long-term protection.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">3. The Flagpole Strategy (Work Smarter, Not Harder)</h3>
+                    <p>When challenged to retrieve a flag from a high pole for a ride home, recruits spent energy scrambling up the slippery metal. Steve simply pulled the pin at the base, let the heavy pole drop, and picked up the flag off the ground. Small, intelligent adjustments in your environment—like prepping meals on Sunday or placing your running shoes by the bed—yield massive habit momentum without wasted effort.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">4. Build Your Howling Commandos (Accountability Systems)</h3>
+                    <p>Cap never fought Hydra alone; he assembled a specialized squad of trusted allies like Bucky Barnes, Gabe Jones, and Dum Dum Dugan. Habits do not survive in isolation. Surrounding yourself with peers who normalize discipline makes health an identity rather than a grueling chore.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">5. "I Can Do This All Day" (Pacing & Longevity)</h3>
+                    <p>Steve’s catchphrase isn't about arrogance; it’s an ethos of steady endurance. Avoid burnout by adopting sustainable micro-habits that you can realistically maintain for the next decade. Real victory lies in continuous, unbroken streak building.</p>
+                
+    <p>There is another lesson in the way Steve approaches setbacks: he does not confuse a temporary limitation with a permanent identity. The people around him repeatedly judge what he cannot do, but he keeps his attention on the values he can practise right now. That distinction matters when building a routine. You may not be able to complete a long workout, study for three hours, or change every meal in one day. You can still take a short walk, review a few pages, or prepare one nourishing option. Small actions are not meaningless simply because they look ordinary.</p>
+    <p>It is also important to remember that discipline should not become punishment. Steve's determination is inspiring, but a healthy routine needs rest, flexibility, and room for real life. Missing one day does not erase previous effort. The useful response is to begin again instead of turning one interruption into a reason to quit. Think of the serum as the dramatic part of the story, not the everyday plan. The everyday plan is the quiet decision to keep practising, make the next helpful choice, and build a life that can support you over time.</p>
+    `,
+                funFact: "Chris Evans declined the role of Captain America three times due to anxiety about fame before Robert Downey Jr. personally called him and convinced him to take the part!"
+            },
+            {
+                id: "film-2",
+                title: "Mastering Retention & Deep Learning",
+                filmTitle: "Good Will Hunting",
+                year: 1997,
+                runtime: "6 min read",
+                category: "Study & Memory",
+                rating: 5.0,
+                watched: true,
+                liked: true,
+                rewatched: true,
+                posterImg: "",
+                svgFallback: `
+                    <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gwh-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#1c1917"/>
+                                <stop offset="100%" stop-color="#292524"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#gwh-bg)"/>
+                        <!-- Chalkboard Mathematical Equations -->
+                        <g opacity="0.2" stroke="#f5f5f4" stroke-width="1.5" fill="none" font-family="monospace" font-size="12">
+                            <path d="M 30,60 Q 90,20 150,60 T 270,60" />
+                            <text x="40" y="100">f(x) = ∫ e^(-x²) dx</text>
+                            <text x="40" y="140">∇ × E = -∂B/∂t</text>
+                            <text x="40" y="180">lim(x→0) sin(x)/x = 1</text>
+                            <text x="40" y="220">E = mc²</text>
+                            <text x="40" y="260">F = d/dt(mv)</text>
+                        </g>
+                        <rect x="30" y="300" width="240" height="2" fill="#d97706" />
+                        <text x="150" y="350" font-family="'Playfair Display', serif" font-weight="800" font-size="22" fill="#f5f5f4" text-anchor="middle" letter-spacing="2">GOOD WILL HUNTING</text>
+                        <text x="150" y="380" font-family="sans-serif" font-weight="600" font-size="10" fill="#d97706" text-anchor="middle" letter-spacing="4">MATT DAMON &bull; ROBIN WILLIAMS</text>
+                    </svg>
+                `,
+                fallbackGradient: "from-amber-900 to-amber-950",
+                tags: ["learning", "retention", "mentorship", "focus"],
+                infographic: GWH_INFOGRAPHIC,
+                spoiler: "Will Hunting’s photographic memory didn't make him wise; real intellectual retention and growth only occurred when he engaged emotionally with experience and stepped out from behind dry academic defense mechanisms.",
+                content: `
+                    <p class="lead text-lg text-white font-serif">You dropped $150,000 on an education you could have got for $1.50 in late fees at the public library. Will Hunting understood information access—but true retention requires vulnerability.</p>
+                    <p>In <em>Good Will Hunting</em>, Matt Damon plays a janitor at MIT who can solve graduate-level Fourier transforms on a hallway chalkboard in minutes. Yet despite reading thousands of books, Will is emotionally trapped and incapable of applying knowledge to his own life choices. His journey provides the ultimate framework for how we absorb, retain, and synthesize knowledge in the digital age.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">1. Active Retrieval vs. Passive Consumption</h3>
+                    <p>Will doesn't just read books; he deconstructs them, argues with them, and tests them against reality. Modern cognitive psychology highlights that re-reading notes or highlighting textbooks creates a false illusion of competence. True retention demands active recall—testing your memory without looking at the text and forcing your brain to reconstruct neural pathways.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">2. The "Feynman Technique" in a Boston Bar</h3>
+                    <p>During the famous bar debate with an arrogant graduate student, Will quotes 50 years of economic history from memory to dismantle a regurgitated argument. He understands the core concepts so thoroughly that he can reframe them effortlessly. If you cannot explain a complex topic in simple terms to a friend, you haven't retained it yet; you've merely memorized words.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">3. Experiential Anchoring (The Park Bench Monologue)</h3>
+                    <p>Robin Williams' character, Dr. Sean Maguire, delivers a masterclass on the limits of book smarts: <em>"If I ask you about art, you'd probably give me the skinny on every art book ever written... but I bet you can't tell me what it smells like in the Sistine Chapel."</em> Connect abstract concepts to emotional, real-world experiences to lock them into long-term memory banks.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">4. Breaking Through Cognitive Defense Mechanisms</h3>
+                    <p>Will used obscure intellectual facts as armor to keep people at a distance. When studying complex subjects, we often collect bookmarks and saved articles to feel productive without doing the hard work of deep comprehension. True learning happens when you drop the armor and wrestle directly with difficult ideas.</p>
+                
+    <p>Another useful part of Will's story is the difference between being able to answer a question and being able to use what you know. A person may remember definitions perfectly but still struggle to recognize when an idea applies outside a classroom. To close that gap, try connecting every new concept to a concrete example. After reading a chapter, describe where the idea might appear in daily life, explain why it matters, and identify a situation in which it might not apply. This turns learning into a process of interpretation rather than a race to collect facts.</p>
+    <p>Will also reminds us that intelligence is not the same as emotional maturity. His talent gives him opportunities, but it cannot make difficult decisions for him or automatically repair his relationships. In the same way, academic achievement does not remove the need for patience, curiosity, and honest self-reflection. A strong learner should be willing to say, “I do not understand this yet,” and ask for help without treating that admission as failure. Mentors, classmates, teachers, and friends can challenge our assumptions in ways that solitary reading cannot.</p>
+    <p>A practical routine inspired by the film could be simple: study a small section, close the material, write down what you remember, and explain the main idea in your own words. Return to it later and test yourself again. When an answer is incomplete, use the gap to decide what to review next. The goal is not to imitate Will's extraordinary memory. It is to become more thoughtful about what you learn, how you apply it, and how willing you are to let new experiences change your understanding.</p>
+    `,
+                funFact: "Robin Williams' poignant story about his wife farting in her sleep was completely improvised on the spot, causing Matt Damon to laugh hysterically and the camera operator to shake the shot!"
+            },
+            {
+                id: "film-3",
+                title: "Vlog: Quiet Moments in Brunei Darussalam",
+                filmTitle: "Life in Brunei (90s Indie Short)",
+                year: 2024,
+                runtime: "3 min read",
+                category: "Visual Essay / Vlog",
+                rating: 5.0,
+                watched: true,
+                liked: true,
+                rewatched: false,
+                posterImg: "",
+                svgFallback: `
+                    <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="brunei-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#022c22"/>
+                                <stop offset="50%" stop-color="#064e3b"/>
+                                <stop offset="100%" stop-color="#0f172a"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#brunei-bg)"/>
+                        <circle cx="150" cy="180" r="70" fill="#f59e0b" opacity="0.2" />
+                        <text x="150" y="200" font-family="'Playfair Display', serif" font-weight="700" font-size="28" fill="#10b981" text-anchor="middle" letter-spacing="3">BRUNEI</text>
+                        <text x="150" y="230" font-family="sans-serif" font-weight="500" font-size="11" fill="#a7f3d0" text-anchor="middle" letter-spacing="5">DARUSSALAM</text>
+                        <line x1="100" y1="260" x2="200" y2="260" stroke="#34d399" stroke-width="1" opacity="0.4" />
+                        <text x="150" y="370" font-family="'Playfair Display', serif" font-weight="700" font-size="18" fill="#ffffff" text-anchor="middle" letter-spacing="2">LIFE IN BRUNEI</text>
+                        <text x="150" y="395" font-family="sans-serif" font-weight="600" font-size="9" fill="#34d399" text-anchor="middle" letter-spacing="3">90s INDIE SHORT VLOG</text>
+                    </svg>
+                `,
+                fallbackGradient: "from-emerald-950 to-teal-900",
+                tags: ["filmmaking", "vlog", "brunei", "minimalism"],
+                spoiler: "Filming in the quietest country in Southeast Asia teaches you that silence isn't the absence of content—it's the canvas where life's clearest thoughts emerge.",
+                content: `
+                    <p class="lead text-lg text-white font-serif">Director's Notes: Filming 90 seconds of pure atmospheric reflection in the Abode of Peace.</p>
+                    <p>When preparing this indie short, my goal was to contrast the rapid, hyper-stimulating pacing of modern online video with the slow, deliberate pulse of daily life in Brunei Darussalam. We shot entirely in 2.39:1 CinemaScope aspect ratio on anamorphic prime lenses to give the everyday greenery, mangrove channels, and quiet urban corners an intentional, epic weight.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">Shot List & Creative Intent</h3>
+                    <ul class="list-disc list-inside space-y-2 my-4 text-muted">
+                        <li><strong class="text-white">Shot 1 (0:00 - 0:15):</strong> Morning fog lifting over Kampong Ayer. Static frame on tripod. No camera movement. Letting natural light do the acting as water taxis gently ripple the water.</li>
+                        <li><strong class="text-white">Shot 2 (0:15 - 0:45):</strong> Close-up tracking shot of heavy tropical raindrops falling off palm leaves. Audio focused entirely on spatial ambient rain soundscapes without music overlay.</li>
+                        <li><strong class="text-white">Shot 3 (0:45 - 1:15):</strong> Golden hour reflection off the golden domes of Omar Ali Saifuddien Mosque. Warm amber color grade to emphasize timeless tranquility.</li>
+                        <li><strong class="text-white">Shot 4 (1:15 - 1:30):</strong> Fade to black with quiet ocean waves crashing along Muara Beach under overcast skies.</li>
+                    </ul>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">The Philosophy of Negative Space (Ma)</h3>
+                    <p>Japanese aesthetics speak of <em>ma</em>—the deliberate pause or empty space that gives shape to surrounding elements. Modern media suffocates viewers with non-stop cuts and loud soundtracks. By slowing down the frame rate and embracing ambient silence, the video invites the viewer to breathe, observe, and find clarity amid noisy daily schedules.</p>
+                
+    <p>The short's visual approach is also a reminder that a place does not need a dramatic event to be worth documenting. Familiar scenes can become meaningful when the camera gives them enough time. A water taxi crossing the river, rain collecting on a leaf, or a quiet street after a shower may seem unremarkable during a busy day. Framed carefully, these details become a record of atmosphere and everyday life. The intention is not to present Brunei as untouched or perfect, but to notice the textures and rhythms that are easy to overlook when we move through familiar surroundings.</p>
+    <p>Sound plays an important role in creating that feeling. Instead of filling every moment with narration or a constant soundtrack, the edit allows natural audio to guide the viewer: water moving, rain falling, distant activity, and the hush between sounds. These details help establish a sense of place more honestly than a rapid sequence of captions could. They also encourage the audience to pay attention. A pause gives the viewer time to look at the frame, notice its smaller details, and decide what the scene means to them.</p>
+    <p>For the creator, this approach requires restraint. It can be tempting to add more transitions, music, effects, and movement because those elements make a video feel busy. Here, simplicity is a deliberate choice rather than a lack of effort. Each shot needs a reason to remain on screen, and each cut should preserve the calm pace of the piece. The final result is an invitation to slow down and see the familiar with fresh eyes. Sometimes the most memorable image is not the biggest landmark, but a quiet moment that feels true to the place.</p>
+    `,
+                funFact: "The entire 90-second short film was captured on a single vintage 35mm manual lens with no autofocus, relying on natural morning sunlight and zero artificial lighting equipment!"
+            },
+            {
+                id: "film-4",
+                title: "Ecology, Consumption & Digital Overconsumption",
+                filmTitle: "WALL-E",
+                year: 2008,
+                runtime: "5 min read",
+                category: "Environment & Mindset",
+                rating: 5.0,
+                watched: true,
+                liked: true,
+                rewatched: true,
+                posterImg: "",
+                svgFallback: `
+                    <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                        <!-- Dusty sky bands -->
+                        <rect width="300" height="450" fill="#0f172a"/>
+                        <rect y="90" width="300" height="70" fill="#2a2440"/>
+                        <rect y="150" width="300" height="60" fill="#7c3a2d"/>
+                        <rect y="200" width="300" height="60" fill="#c2611f"/>
+                        <rect y="250" width="300" height="60" fill="#e89a2e"/>
+                        <circle cx="228" cy="262" r="34" fill="#fcd34d" opacity="0.85"/>
+
+                        <!-- Stars -->
+                        <circle cx="50" cy="40" r="1.5" fill="#fff" opacity="0.8"/>
+                        <circle cx="120" cy="70" r="1.2" fill="#fff" opacity="0.7"/>
+                        <circle cx="262" cy="45" r="1.5" fill="#fff" opacity="0.8"/>
+                        <circle cx="205" cy="100" r="1" fill="#fff" opacity="0.6"/>
+
+                        <!-- Distant trash towers -->
+                        <polygon points="0,300 0,250 18,250 18,232 40,232 40,262 62,262 62,240 84,240 84,300" fill="#4a2c1a"/>
+                        <polygon points="216,300 216,255 238,255 238,225 262,225 262,248 284,248 284,235 300,235 300,300" fill="#4a2c1a"/>
+
+                        <!-- Ground -->
+                        <rect y="300" width="300" height="150" fill="#3b2314"/>
+                        <rect y="300" width="300" height="4" fill="#5c3a21"/>
+                        <rect x="14" y="318" width="22" height="16" fill="#6b4226"/>
+                        <rect x="40" y="326" width="14" height="10" fill="#57361f"/>
+                        <rect x="250" y="320" width="24" height="18" fill="#6b4226"/>
+                        <rect x="228" y="330" width="14" height="10" fill="#57361f"/>
+
+                        <!-- EVE flying in the sky -->
+                        <g transform="translate(70, 95) rotate(-12)">
+                            <ellipse cx="0" cy="0" rx="13" ry="19" fill="#f8fafc"/>
+                            <ellipse cx="0" cy="-5" rx="8" ry="5" fill="#0f172a"/>
+                            <ellipse cx="-3" cy="-5" rx="1.6" ry="2.4" fill="#38bdf8"/>
+                            <ellipse cx="3" cy="-5" rx="1.6" ry="2.4" fill="#38bdf8"/>
+                        </g>
+
+                        <!-- WALL-E -->
+                        <!-- Ground shadow -->
+                        <ellipse cx="150" cy="338" rx="68" ry="6" fill="#000" opacity="0.35"/>
+
+                        <!-- Treads -->
+                        <rect x="92" y="296" width="32" height="42" rx="12" fill="#2b3340"/>
+                        <rect x="176" y="296" width="32" height="42" rx="12" fill="#2b3340"/>
+                        <circle cx="108" cy="308" r="6" fill="#4b5563"/>
+                        <circle cx="108" cy="328" r="6" fill="#4b5563"/>
+                        <circle cx="192" cy="308" r="6" fill="#4b5563"/>
+                        <circle cx="192" cy="328" r="6" fill="#4b5563"/>
+
+                        <!-- Neck -->
+                        <rect x="144" y="192" width="12" height="36" fill="#6b7280"/>
+                        <rect x="141" y="205" width="18" height="5" fill="#4b5563"/>
+
+                        <!-- Body box -->
+                        <rect x="106" y="224" width="88" height="76" rx="6" fill="#d9941f" stroke="#78350f" stroke-width="3"/>
+                        <rect x="106" y="224" width="88" height="14" rx="4" fill="#b87a14"/>
+                        <rect x="116" y="248" width="34" height="14" rx="2" fill="#1e293b"/>
+                        <rect x="119" y="251" width="20" height="8" rx="1" fill="#22c55e"/>
+                        <rect x="158" y="248" width="26" height="4" fill="#92400e"/>
+                        <rect x="158" y="256" width="26" height="4" fill="#92400e"/>
+                        <rect x="158" y="264" width="26" height="4" fill="#92400e"/>
+                        <circle cx="122" cy="282" r="3" fill="#92400e"/>
+                        <circle cx="178" cy="286" r="4" fill="#a16207"/>
+
+                        <!-- Left arm -->
+                        <path d="M106 254 L84 276" stroke="#6b7280" stroke-width="7" stroke-linecap="round" fill="none"/>
+                        <circle cx="82" cy="279" r="6" fill="#4b5563"/>
+
+                        <!-- Right arm holding seedling -->
+                        <path d="M194 254 L214 268" stroke="#6b7280" stroke-width="7" stroke-linecap="round" fill="none"/>
+                        <circle cx="216" cy="270" r="6" fill="#4b5563"/>
+
+                        <!-- Seedling in boot -->
+                        <rect x="208" y="272" width="18" height="15" rx="2" fill="#78350f"/>
+                        <rect x="206" y="271" width="22" height="4" rx="1" fill="#5b2a0c"/>
+                        <path d="M217 271 L217 258" stroke="#16a34a" stroke-width="2" fill="none"/>
+                        <path d="M217 261 Q207 258 205 250 Q215 251 217 261 Z" fill="#22c55e"/>
+                        <path d="M217 259 Q227 256 230 247 Q219 249 217 259 Z" fill="#16a34a"/>
+
+                        <!-- Binocular eyes -->
+                        <rect x="138" y="176" width="24" height="12" fill="#6b7280"/>
+                        <g transform="rotate(-8 122 176)">
+                            <rect x="98" y="158" width="46" height="36" rx="12" fill="#a8b0bc" stroke="#475569" stroke-width="2.5"/>
+                            <circle cx="121" cy="176" r="13" fill="#1e293b"/>
+                            <circle cx="121" cy="176" r="8.5" fill="#0284c7"/>
+                            <circle cx="121" cy="176" r="4" fill="#0f172a"/>
+                            <circle cx="117" cy="172" r="2.5" fill="#fff" opacity="0.85"/>
+                        </g>
+                        <g transform="rotate(8 178 176)">
+                            <rect x="156" y="158" width="46" height="36" rx="12" fill="#a8b0bc" stroke="#475569" stroke-width="2.5"/>
+                            <circle cx="179" cy="176" r="13" fill="#1e293b"/>
+                            <circle cx="179" cy="176" r="8.5" fill="#0284c7"/>
+                            <circle cx="179" cy="176" r="4" fill="#0f172a"/>
+                            <circle cx="175" cy="172" r="2.5" fill="#fff" opacity="0.85"/>
+                        </g>
+
+                        <!-- Typography -->
+                        <text x="150" y="385" font-family="'Playfair Display', serif" font-weight="800" font-size="30" fill="#ffffff" text-anchor="middle" letter-spacing="4">WALL&bull;E</text>
+                        <text x="150" y="410" font-family="sans-serif" font-weight="600" font-size="10" fill="#fcd34d" text-anchor="middle" letter-spacing="4">DISNEY &bull; PIXAR</text>
+                    </svg>
+                `,
+                fallbackGradient: "from-sky-900 via-slate-900 to-stone-900",
+                tags: ["environment", "mindfulness", "minimalism", "pixar"],
+                spoiler: "The Axiom humans didn't lose Earth because of toxic garbage alone; they lost it because they traded active living and real connection for convenient screens and endless automated consumption.",
+                content: `
+                    <p class="lead text-lg text-white font-serif">WALL-E spent 700 years compacting garbage on an abandoned Earth, while humans hovered in floating chairs sipping meals through straws. Pixar didn't just warn us about trash—they predicted digital paralysis.</p>
+                    <p>Andrew Stanton’s masterpiece <em>WALL-E</em> remains one of cinema's sharpest critiques of consumerism and environmental neglect. But beneath the rusted robot romance lies a critical warning about how convenience can quietly erode our health, critical thinking, and connection to nature.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">1. The Danger of Frictionless Living</h3>
+                    <p>On board the Axiom, every human need is met instantly by Buy n Large algorithms. Hover chairs move people automatically, screens hover inches from faces, and food is processed into uniform liquids. The result? Muscle atrophy, complete lack of physical orientation, and blindness to the person sitting right beside them. When we eliminate all physical and mental friction from life, we eliminate the very stimulus that keeps us resilient.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">2. Curating Beauty in the Trash (WALL-E's Collection)</h3>
+                    <p>While humans with infinite resources consume mindlessly, WALL-E finds deep wonder in discarded objects—a Rubik's cube, a glowing lightbulb, an old VHS tape of <em>Hello, Dolly!</em>. Environmental stewardship and mental peace start with appreciating what already exists in our space rather than constantly chasing the next upgraded product.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">3. The Plant in the Boot (Micro-Restoration)</h3>
+                    <p>Earth wasn't saved by a massive planetary engine; it was saved because one tiny robot protected one fragile green seedling inside a discarded leather boot. Global environmental challenges feel overwhelming, but systemic restoration always begins with localized micro-actions: planting a garden, reducing single-use plastics, and honoring nature.</p>
+                
+    <p>The film's contrast between the crowded, automated Axiom and the abandoned Earth makes its environmental message easy to understand. The problem is not technology by itself; it is the habit of using convenience without considering its consequences. A product can save time and still create waste. A screen can connect people and still distract them from the world around them. The film asks viewers to look beyond the immediate comfort of a purchase or service and consider the longer chain of materials, energy, habits, and disposal that follows.</p>
+    <p>Its message about consumption can be applied to digital life as well. Endless scrolling encourages us to move from one piece of content to another without pausing to ask whether any of it is useful. Recommendation systems can make the next video or product feel effortless to access, but effortless access does not always mean genuine satisfaction. Choosing what deserves our attention is a form of responsibility. We can set boundaries around screen time, unsubscribe from accounts that encourage unnecessary buying, and make space for activities that involve movement, creativity, or direct contact with other people.</p>
+    <p>WALL-E's careful collection of objects offers a quieter alternative to constant replacement. Repairing something, reusing a container, borrowing an item, or choosing a product that lasts longer may seem like small decisions, but they change the relationship we have with our belongings. These actions are not a complete solution to large environmental problems, and individuals cannot carry the whole responsibility alone. Businesses, communities, and governments also shape the systems in which people make choices. Still, personal habits can support wider change and help us notice that a more meaningful life does not always require more things.</p>
+    `,
+                funFact: "Legendary sound designer Ben Burtt created over 2,400 distinct sound effects for WALL-E using real-world objects like slinkys, canvas bags, and generator motors—the most of any film in movie history!"
+            },
+            {
+                id: "film-5",
+                title: "Autonomy, Orders & Owning Your Own Story",
+                filmTitle: "Jarhead",
+                year: 2005,
+                runtime: "6 min read",
+                category: "Politics & Autonomy",
+                rating: 5.0,
+                watched: true,
+                liked: true,
+                rewatched: false,
+                posterImg: "",
+                svgFallback: `
+                    <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                        <!-- Desert dusk sky -->
+                        <rect width="300" height="450" fill="#0b0f1a"/>
+                        <rect y="120" width="300" height="70" fill="#2b1620"/>
+                        <rect y="185" width="300" height="55" fill="#5a2418"/>
+                        <rect y="235" width="300" height="45" fill="#a8441a"/>
+                        <rect y="275" width="300" height="30" fill="#e08a24"/>
+
+                        <!-- Stars -->
+                        <circle cx="40" cy="38" r="1.4" fill="#fff" opacity="0.8"/>
+                        <circle cx="118" cy="62" r="1.1" fill="#fff" opacity="0.6"/>
+                        <circle cx="205" cy="30" r="1.5" fill="#fff" opacity="0.8"/>
+                        <circle cx="262" cy="78" r="1.1" fill="#fff" opacity="0.6"/>
+
+                        <!-- Burning oil well smoke -->
+                        <ellipse cx="62" cy="215" rx="20" ry="78" fill="#07070a" opacity="0.75"/>
+                        <ellipse cx="72" cy="150" rx="34" ry="30" fill="#07070a" opacity="0.6"/>
+                        <ellipse cx="238" cy="225" rx="16" ry="68" fill="#07070a" opacity="0.7"/>
+                        <ellipse cx="246" cy="170" rx="28" ry="24" fill="#07070a" opacity="0.55"/>
+
+                        <!-- Far dunes -->
+                        <path d="M0 300 Q70 284 150 298 T300 292 L300 450 L0 450 Z" fill="#2a1609"/>
+
+                        <!-- Oil fires -->
+                        <path d="M54 296 Q50 278 58 262 Q60 276 66 270 Q70 284 72 296 Z" fill="#f97316"/>
+                        <path d="M58 296 Q57 284 62 276 Q65 286 67 296 Z" fill="#fde047"/>
+                        <path d="M231 296 Q228 282 234 268 Q237 280 242 274 Q246 286 246 296 Z" fill="#f97316"/>
+                        <path d="M235 296 Q234 287 238 280 Q241 288 242 296 Z" fill="#fde047"/>
+
+                        <!-- Foreground dune -->
+                        <path d="M0 338 Q150 306 300 340 L300 450 L0 450 Z" fill="#1f1208"/>
+
+                        <!-- Marine silhouette -->
+                        <g fill="#050505" stroke="none">
+                            <!-- Helmet -->
+                            <path d="M129 208 Q127 176 150 175 Q173 176 171 208 Z"/>
+                            <rect x="124" y="205" width="52" height="5" rx="2"/>
+                            <!-- Head and neck -->
+                            <rect x="136" y="210" width="28" height="16" rx="6"/>
+                            <rect x="144" y="224" width="12" height="8"/>
+                            <!-- Shoulders and torso -->
+                            <path d="M112 262 Q114 232 150 230 Q186 232 188 262 L192 345 L108 345 Z"/>
+                        </g>
+                        <!-- Rifle held upright -->
+                        <path d="M196 232 L180 346" stroke="#050505" stroke-width="5" stroke-linecap="round" fill="none"/>
+                        <path d="M200 214 L196 232" stroke="#050505" stroke-width="3" stroke-linecap="round" fill="none"/>
+                        <!-- Rim light on helmet -->
+                        <path d="M133 196 Q138 180 152 178" stroke="#e08a24" stroke-width="1.5" fill="none" opacity="0.7"/>
+
+                        <!-- Typography -->
+                        <text x="150" y="392" font-family="'Playfair Display', serif" font-weight="800" font-size="32" fill="#ffffff" text-anchor="middle" letter-spacing="5">JARHEAD</text>
+                        <text x="150" y="416" font-family="sans-serif" font-weight="600" font-size="10" fill="#f59e0b" text-anchor="middle" letter-spacing="4">WAITING FOR A WAR</text>
+                    </svg>
+                `,
+                fallbackGradient: "from-orange-950 to-slate-900",
+                tags: ["autonomy", "politics", "identity", "war"],
+                spoiler: "Swofford trains for one shot he never gets to take. The film's real argument is that the deepest cost of obeying a system is not a wound, but a mind that keeps waiting for orders long after the war is over.",
+                content: `
+                    <p class="lead text-lg text-white font-serif">Jarhead is a war movie in which almost nothing happens, and that is exactly why it is such a sharp film about autonomy. It asks who gets to decide what you do, what you feel, and what your story means.</p>
+                    <p>Sam Mendes' 2005 adaptation of Anthony Swofford's 2003 memoir follows a young Marine through the buildup to the Gulf War. Most of the film is spent on training, heat, boredom, and waiting for a fight that arrives late and ends quickly. Instead of battlefield heroics, it shows what happens to a person when an institution makes nearly every decision for them.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">1. Who Writes the Script for How You Feel?</h3>
+                    <p>In one of the film's best-known scenes, the Marines gather to watch the helicopter attack from <em>Apocalypse Now</em> and cheer along with the music, even though many viewers read that sequence as a warning about war rather than a celebration of it. The moment shows how easily a group can absorb a ready-made reaction. Nobody in the room has to be ordered to feel that way; the mood simply spreads. Our own feeds work in a similar manner, handing us the right outrage, the right joke, or the right side before we have had time to ask what we actually think.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">2. Orders, Hierarchy, and the Limits of Your Own Say</h3>
+                    <p>Swofford is trained as a sniper, yet his readiness counts for little because other people control when and whether anything happens. In one painful sequence, a sniper team that has waited for its chance is overruled when the mission is taken out of their hands. The point is not that structure and discipline are bad. Most communities, workplaces, and governments rely on them. The point is that handing over your judgment has a price, and it is worth knowing where your own responsibility begins and ends before you hand it over.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">3. Reclaiming Your Own Story Afterwards</h3>
+                    <p>The film ends with the war over and the men still carrying the weight of what it asked of them. Swofford's closing narration suggests that the rifle he trained with never really leaves his hands, even after it is turned in. Coming home does not automatically return a person's sense of direction. Getting it back takes deliberate work: naming what was done to you, what you chose, and what you want to do next.</p>
+
+    <p>For everyday life, the lesson does not have to involve war at all. Any strong institution, whether a school, a company, a political movement, or a group chat, can shape how we think without ever announcing it. A useful habit is to pause before adopting a strong opinion and ask a few simple questions. Where did this view come from? Did I reach it by weighing evidence, or by watching what the people around me approved of? What would I think if nobody were watching? Writing the answers down can make the difference between reacting and deciding.</p>
+    <p>Autonomy also does not mean rejecting every rule or distrusting every authority. It means keeping the ability to question, even when you choose to follow. Reading from more than one source, talking with people who see an issue differently, and making small decisions on purpose rather than by default all help keep that ability strong. When we do decide to commit to a group or a cause, we are better off doing so knowingly, with a clear idea of what we are agreeing to and what we are not.</p>
+    <p>It is also worth remembering that the film is one man's version of events, filtered through memory and adapted for the screen. Some veterans have questioned how closely parts of it match their own experience, and that is a reasonable reason to treat it as a personal account rather than a complete record of the war. Still, its central observation holds up well: a person can be fully trained, fully obedient, and fully present, and still be left asking whose story they were actually living. The way back is rarely dramatic. It is a patient habit of noticing, questioning, and choosing for yourself.</p>
+    `,
+                funFact: "Walter Murch, the legendary editor of Apocalypse Now, also edited Jarhead, the very film the Marines watch and cheer at in the movie!"
+            }
+        ];
+
+        /**
+         * ====================================================================
+         * HELPER FUNCTIONS & UI RENDERERS
+         * ====================================================================
+         */
+
+        // Navigation Helper
+        function navigateToHash(hash) {
+            window.location.hash = hash;
+            router();
+        }
+
+        function navigateToEntry(entryId) {
+            window.location.hash = '#' + entryId;
+            router();
+        }
+
+        // Render Star Ratings
+        function renderStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalf = rating % 1 !== 0;
+            
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<svg class="text-brandAmber text-sm mr-0.5" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><polygon points="12,2 15.1,8.6 22,9.6 17,14.5 18.2,21.5 12,18.2 5.8,21.5 7,14.5 2,9.6 8.9,8.6"/></svg>';
+            }
+            if (hasHalf) {
+                stars += '<svg class="text-brandAmber text-sm mr-0.5" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><polygon points="12,2 15.1,8.6 22,9.6 17,14.5 18.2,21.5 12,18.2 5.8,21.5 7,14.5 2,9.6 8.9,8.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><polygon points="12,2 12,18.2 5.8,21.5 7,14.5 2,9.6 8.9,8.6"/></svg>';
+            }
+            return stars;
+        }
+
+        // Letterboxd Action Badges
+        function renderActionIcons(entry) {
+            return `
+                <div class="flex items-center space-x-3 text-xs text-muted font-mono">
+                    <span title="Watched" class="${entry.watched ? 'text-brandBlue' : 'text-muted/40'} flex items-center gap-1">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path fill-rule="evenodd" d="M12 5C6 5 2 12 2 12s4 7 10 7 10-7 10-7-4-7-10-7zm0 3a4 4 0 110 8 4 4 0 010-8z"/><circle cx="12" cy="12" r="1.8"/></svg> Watched
+                    </span>
+                    <span title="Liked" class="${entry.liked ? 'text-brandPink' : 'text-muted/40'} flex items-center gap-1">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z"/></svg> Liked
+                    </span>
+                    <span title="Rewatched" class="${entry.rewatched ? 'text-brandAmber' : 'text-muted/40'} flex items-center gap-1">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M20 12a8 8 0 11-2.6-5.9M20 4v5h-5"/></svg> Rewatch
+                    </span>
+                </div>
+            `;
+        }
+
+        // Toggle Spoiler Blur
+        function toggleSpoiler(element) {
+            element.classList.toggle('revealed');
+        }
+
+        // Generate Cinema Ticket Newsletter HTML
+        function renderCinemaTicket(formId = "newsletter-form") {
+            return `
+                <div class="relative bg-panel border border-border rounded-xl p-6 shadow-2xl overflow-hidden max-w-md mx-auto">
+                    <!-- Ticket Accent Header Bar -->
+                    <div class="h-1.5 w-full -mt-6 -mx-6 mb-5 bg-gradient-to-r from-brandBlue via-brandPink to-brandAmber"></div>
+                    
+                    <div class="flex items-center justify-between text-xs font-mono text-muted mb-2">
+                        <span class="tracking-widest uppercase text-brandAmber font-bold">ADMIT ONE</span>
+                        <span>NO EXPIRATION</span>
+                    </div>
+
+                    <h3 class="text-xl font-bold font-serif text-white mb-1">Join the Mailing List</h3>
+                    <p class="text-xs text-muted mb-4">Get the next film analysis & spoiler in your inbox.</p>
+
+                    <form id="${formId}" onsubmit="handleNewsletterSubmit(event, '${formId}')" class="space-y-3">
+                        <!-- Bot Honeypot -->
+                        <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+
+                        <div>
+                            <input type="text" name="name" placeholder="Your name (optional)" 
+                                class="w-full bg-bg border border-border rounded-lg px-3 py-2 text-sm text-text focus:outline-none focus:border-brandBlue transition-colors placeholder:text-muted/50" />
+                        </div>
+                        <div>
+                            <input type="email" name="email" required placeholder="Your email address (required)" 
+                                class="w-full bg-bg border border-border rounded-lg px-3 py-2 text-sm text-text focus:outline-none focus:border-brandBlue transition-colors placeholder:text-muted/50" />
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-gradient-to-r from-brandBlue to-brandPink text-white font-semibold py-2.5 rounded-lg text-sm tracking-wide hover:opacity-90 active:scale-[0.99] transition-all flex items-center justify-center space-x-2 shadow-lg">
+                            <span>Subscribe</span>
+                            <svg class="text-xl" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M3 7h18v3a2 2 0 000 4v3H3v-3a2 2 0 000-4z"/></svg>
+                        </button>
+                    </form>
+
+                    <!-- Status Messages -->
+                    <div id="${formId}-status" class="hidden mt-3 p-3 rounded-lg text-xs font-medium text-center"></div>
+
+                    <!-- Dashed Perforation Line -->
+                    <div class="relative my-4 border-b border-dashed border-border/80"></div>
+                    <div class="text-[10px] text-center font-mono text-muted/60 uppercase tracking-widest">
+                        SPOILER ALERT PRESS &bull; ADMISSION GUARANTEED
+                    </div>
+                </div>
+            `;
+        }
+
+        // Newsletter Submission Handler via Formspree
+        async function handleNewsletterSubmit(event, formId) {
+            event.preventDefault();
+            const form = document.getElementById(formId);
+            const statusEl = document.getElementById(`${formId}-status`);
+            const submitBtn = form.querySelector('button[type="submit"]');
+
+            const formData = new FormData(form);
+            
+            // Disable button during send
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            
+            statusEl.classList.remove('hidden', 'bg-emerald-500/10', 'text-emerald-400', 'bg-rose-500/10', 'text-rose-400');
+            statusEl.classList.add('bg-brandBlue/10', 'text-brandBlue');
+            statusEl.textContent = 'Sending...';
+
+            try {
+                const response = await fetch(FORMSPREE_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    statusEl.className = 'mt-3 p-3 rounded-lg text-xs font-medium text-center bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
+                    statusEl.textContent = "You're on the list! 🎬";
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    throw new Error(data.error || 'Submission failed');
+                }
+            } catch (err) {
+                statusEl.className = 'mt-3 p-3 rounded-lg text-xs font-medium text-center bg-rose-500/10 text-rose-400 border border-rose-500/20';
+                statusEl.textContent = 'Oops! Something went wrong. Please try again.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        /**
+         * ====================================================================
+         * PAGE ROUTING & VIEW RENDERERS
+         * ====================================================================
+         */
+
+        // Render Homepage View
+        function renderHome() {
+            return `
+                <div class="space-y-12">
+                    <!-- Hero Header -->
+                    <div class="text-center py-8 space-y-3">
+                        <h1 class="text-4xl md:text-6xl font-extrabold font-serif text-white tracking-tight">
+                            Movies, spoiled on purpose.
+                        </h1>
+                        <p class="text-lg md:text-xl text-muted max-w-2xl mx-auto font-sans font-normal">
+                            Deconstructing cinema to uncover hard-hitting life lessons, habits, and study principles.
+                        </p>
+                    </div>
+
+                    <!-- Now Showing (Poster Grid) -->
+                    <section>
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-xs font-mono uppercase tracking-widest text-brandBlue font-bold flex items-center gap-2">
+                                <svg viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path fill-rule="evenodd" d="M6 3h12a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2zM6 5v2h2V5zm0 4v2h2V9zm0 4v2h2v-2zm0 4v2h2v-2zM16 5v2h2V5zm0 4v2h2V9zm0 4v2h2v-2zm0 4v2h2v-2zM10 5v14h4V5z"/></svg> Now Showing
+                            </h2>
+                            <span class="text-xs text-muted font-mono">Click poster to read</span>
+                        </div>
+                        
+                        <div class="flex md:grid md:grid-cols-5 gap-4 overflow-x-auto no-scrollbar pt-4 pb-8 -mt-4 -mb-4 -mx-4 px-4 md:-mx-4 md:px-4">
+                            ${BLOG_ENTRIES.map(entry => `
+                                <div onclick="navigateToEntry('${entry.id}')" class="group flex-shrink-0 w-44 md:w-auto cursor-pointer">
+                                    <div class="aspect-[2/3] rounded-lg overflow-hidden relative bg-panel border border-border shadow-md transition-all duration-300 group-hover:scale-105 group-hover:border-brandBlue group-hover:shadow-[0_0_18px_rgba(91,141,184,0.5)]">
+                                        ${entry.posterImg ? `<img src="${entry.posterImg}" alt="${entry.filmTitle}" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />` : ''}
+                                        
+                                        <!-- Inline Vector SVG Poster -->
+                                        <div class="${entry.posterImg ? 'hidden' : ''} absolute inset-0 z-0">
+                                            ${entry.svgFallback}
+                                        </div>
+
+                                        <!-- Overlay info -->
+                                        <div class="absolute inset-0 bg-gradient-to-t from-bg/95 via-bg/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-20 p-3 flex flex-col justify-end">
+                                            <div class="text-xs font-serif font-bold text-white line-clamp-2">${entry.title}</div>
+                                            <div class="text-[10px] text-brandAmber font-mono mt-1">${renderStars(entry.rating)}</div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 text-left">
+                                        <div class="text-xs font-serif font-semibold text-white group-hover:text-brandBlue transition-colors truncate">${entry.filmTitle}</div>
+                                        <div class="text-[11px] text-muted flex items-center justify-between font-mono">
+                                            <span>${entry.year}</span>
+                                            <span>${renderStars(entry.rating)}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+
+                    <!-- Recent Activity & Newsletter Grid -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                        <!-- Recent Activity List (7 Cols) -->
+                        <section class="lg:col-span-7 space-y-4">
+                            <div class="flex items-center justify-between border-b border-border pb-2">
+                                <h2 class="text-xs font-mono uppercase tracking-widest text-brandPink font-bold flex items-center gap-2">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.4 2.6L3 8M3 3v5h5M12 7v5l3 2"/></svg> Recent Activity
+                                </h2>
+                                <button onclick="navigateToHash('#diary')" class="text-xs text-muted hover:text-white font-mono transition-colors">
+                                    View All &rarr;
+                                </button>
+                            </div>
+
+                            <div class="space-y-3">
+                                ${BLOG_ENTRIES.slice(0, 4).map(entry => `
+                                    <div onclick="navigateToEntry('${entry.id}')" class="bg-panel border border-border hover:border-brandPink/50 rounded-xl p-4 transition-all duration-200 cursor-pointer group flex items-start gap-4">
+                                        <div class="w-12 h-16 rounded overflow-hidden bg-bg flex-shrink-0 relative">
+                                            ${entry.posterImg ? `<img src="${entry.posterImg}" alt="${entry.filmTitle}" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />` : ''}
+                                            <div class="${entry.posterImg ? 'hidden' : ''} absolute inset-0 z-0">
+                                                ${entry.svgFallback}
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow min-w-0">
+                                            <div class="flex items-center justify-between text-xs text-muted font-mono mb-1">
+                                                <span class="text-brandPink font-semibold truncate">${entry.category}</span>
+                                                <span class="flex-shrink-0 ml-2">${renderStars(entry.rating)}</span>
+                                            </div>
+                                            <h3 class="text-sm font-serif font-bold text-white group-hover:text-brandPink transition-colors truncate">
+                                                ${entry.title}
+                                            </h3>
+                                            <p class="text-xs text-muted line-clamp-1 mt-1 font-sans">
+                                                ${entry.filmTitle} (${entry.year})
+                                            </p>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </section>
+
+                        <!-- Newsletter Ticket Callout Section (5 Cols) -->
+                        <section class="lg:col-span-5 space-y-4">
+                            <div class="border-b border-border pb-2">
+                                <h2 class="text-xs font-mono uppercase tracking-widest text-brandAmber font-bold flex items-center gap-2">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg> Stay Updated
+                                </h2>
+                            </div>
+                            ${renderCinemaTicket("home-sidebar-newsletter")}
+                        </section>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Diary Page View
+        function renderDiary() {
+            return `
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="border-b border-border pb-4 flex items-center justify-between">
+                        <div>
+                            <h1 class="text-3xl font-serif font-bold text-white">Film Log & Diary</h1>
+                            <p class="text-xs text-muted font-mono mt-1">Chronological record of movies analyzed and life lessons extracted.</p>
+                        </div>
+                        <span class="text-xs font-mono text-brandBlue bg-brandBlue/10 px-3 py-1 rounded-full border border-brandBlue/20">
+                            ${BLOG_ENTRIES.length} Entries Logged
+                        </span>
+                    </div>
+
+                    <!-- Diary Table -->
+                    <div class="bg-panel border border-border rounded-xl overflow-hidden">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead>
+                                <tr class="border-b border-border text-xs font-mono text-muted uppercase bg-bg/50">
+                                    <th class="py-3 px-4">Film</th>
+                                    <th class="py-3 px-4">Article Title</th>
+                                    <th class="py-3 px-4 hidden md:table-cell">Rating</th>
+                                    <th class="py-3 px-4 text-right">Read</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-border/60 font-sans">
+                                ${BLOG_ENTRIES.map(entry => `
+                                    <tr onclick="navigateToEntry('${entry.id}')" class="hover:bg-panel-hover transition-colors cursor-pointer group">
+                                        <td class="py-3 px-4 font-medium text-white group-hover:text-brandBlue">
+                                            ${entry.filmTitle} <span class="text-xs text-muted">(${entry.year})</span>
+                                        </td>
+                                        <td class="py-3 px-4 text-text font-serif">
+                                            ${entry.title}
+                                        </td>
+                                        <td class="py-3 px-4 hidden md:table-cell">
+                                            ${renderStars(entry.rating)}
+                                        </td>
+                                        <td class="py-3 px-4 text-right font-mono text-xs text-brandBlue">
+                                            ${entry.runtime}
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Lists Page View
+        function renderLists() {
+            return `
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <div class="border-b border-border pb-4">
+                        <h1 class="text-3xl font-serif font-bold text-white">Curated Lists</h1>
+                        <p class="text-xs text-muted font-mono mt-1">Categorized film collections for personal development.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-panel border border-border rounded-xl p-6 space-y-3 hover:border-brandBlue transition-colors">
+                            <div class="text-xs font-mono text-brandBlue uppercase tracking-wider font-bold">List #01</div>
+                            <h2 class="text-xl font-serif font-bold text-white">Cinema for Personal Productivity</h2>
+                            <p class="text-xs text-muted">Films that inspire daily habit building, relentless work ethic, and deep focus.</p>
+                            <div class="flex -space-x-2 pt-2">
+                                <div class="w-8 h-12 bg-blue-900 border border-bg rounded"></div>
+                                <div class="w-8 h-12 bg-amber-900 border border-bg rounded"></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-panel border border-border rounded-xl p-6 space-y-3 hover:border-brandPink transition-colors">
+                            <div class="text-xs font-mono text-brandPink uppercase tracking-wider font-bold">List #02</div>
+                            <h2 class="text-xl font-serif font-bold text-white">Critical Thinking & Autonomy</h2>
+                            <p class="text-xs text-muted">Stories that challenge public consensus, dogma, and mental passive consumption.</p>
+                            <div class="flex -space-x-2 pt-2">
+                                <div class="w-8 h-12 bg-red-950 border border-bg rounded"></div>
+                                <div class="w-8 h-12 bg-stone-900 border border-bg rounded"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Individual Film Entry View
+        function renderFilmEntry(entryId) {
+            const index = BLOG_ENTRIES.findIndex(e => e.id === entryId);
+            if (index === -1) return renderHome();
+
+            const entry = BLOG_ENTRIES[index];
+            const prevEntry = BLOG_ENTRIES[(index - 1 + BLOG_ENTRIES.length) % BLOG_ENTRIES.length];
+            const nextEntry = BLOG_ENTRIES[(index + 1) % BLOG_ENTRIES.length];
+
+            return `
+                <article class="max-w-4xl mx-auto space-y-10">
+                    <!-- ENTRY HEADER / POSTER & META -->
+                    <div class="flex flex-col md:flex-row gap-8 items-start border-b border-border pb-8">
+                        <!-- Poster -->
+                        <div class="w-48 md:w-56 aspect-[2/3] rounded-lg overflow-hidden bg-panel border border-border shadow-xl flex-shrink-0 relative mx-auto md:mx-0">
+                            ${entry.posterImg ? `<img src="${entry.posterImg}" alt="${entry.filmTitle}" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />` : ''}
+                            <div class="${entry.posterImg ? 'hidden' : ''} absolute inset-0 z-0">
+                                ${entry.svgFallback}
+                            </div>
+                        </div>
+
+                        <!-- Header Information -->
+                        <div class="space-y-4 flex-grow text-center md:text-left">
+                            <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 text-xs font-mono text-muted">
+                                <span class="text-brandBlue font-semibold uppercase tracking-wider">${entry.category}</span>
+                                <span>&bull;</span>
+                                <span>${entry.runtime}</span>
+                            </div>
+
+                            <h1 class="text-3xl md:text-5xl font-extrabold font-serif text-white tracking-tight leading-tight">
+                                ${entry.title}
+                            </h1>
+
+                            <div class="text-base text-text font-serif italic">
+                                Film Focus: <span class="text-white font-semibold">${entry.filmTitle}</span> (${entry.year})
+                            </div>
+
+                            <div class="flex items-center justify-center md:justify-start space-x-4 py-2 border-y border-border/60">
+                                <div>${renderStars(entry.rating)}</div>
+                                <span>&bull;</span>
+                                ${renderActionIcons(entry)}
+                            </div>
+
+                            <!-- Tags -->
+                            <div class="flex flex-wrap justify-center md:justify-start gap-2 pt-1">
+                                ${entry.tags.map(tag => `<span class="text-[11px] font-mono bg-panel border border-border px-2.5 py-1 rounded-full text-muted">#${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SPOILER WARNING BANNER -->
+                    <div class="bg-panel/80 border border-brandAmber/30 rounded-xl p-5 space-y-2">
+                        <div class="flex items-center space-x-2 text-xs font-mono text-brandAmber uppercase font-bold tracking-wider">
+                            <svg viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path fill-rule="evenodd" d="M12 2L1 21h22zM11 9h2v6h-2zm0 8h2v2h-2z"/></svg>
+                            <span>The Core Spoiler & Life Lesson (Click to reveal)</span>
+                        </div>
+                        <div onclick="toggleSpoiler(this)" class="spoiler-text bg-bg p-4 rounded-lg border border-border text-sm md:text-base font-serif text-white leading-relaxed">
+                            "${entry.spoiler}"
+                        </div>
+                    </div>
+
+                    <!-- 2.39:1 CINEMASCOPE VIDEO FRAME (IF VLOG) -->
+                    ${entry.isVideo ? `
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between text-xs font-mono text-muted">
+                                <span class="text-brandPink font-bold uppercase"><svg class="mr-1" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M3 6h12a2 2 0 012 2v8a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2zm15 4l5-3v10l-5-3z"/></svg> CinemaScope 2.39:1 Frame</span>
+                                <span>90 Sec Short</span>
+                            </div>
+                            <div class="w-full relative rounded-xl overflow-hidden bg-black border border-border shadow-2xl" style="padding-top: 41.84%;">
+                                <iframe src="${entry.videoEmbedUrl}" title="Life in Brunei" class="absolute top-0 left-0 w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <!-- ARTICLE CONTENT BODY -->
+                    <div class="prose prose-invert max-w-none text-text space-y-5 leading-relaxed font-sans text-base">
+                        ${entry.content}
+                    </div>
+
+                    <!-- ENTRY INFOGRAPHIC (optional) -->
+                    ${entry.infographic || ''}
+
+                    <!-- MOVIE FUN FACT BOX -->
+                    ${entry.funFact ? `
+                        <div class="bg-panel border border-brandBlue/30 rounded-xl p-5 flex items-start space-x-4 my-6">
+                            <div class="text-brandBlue text-2xl pt-1">
+                                <svg viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M3 10h18v9a2 2 0 01-2 2H5a2 2 0 01-2-2zM3.2 5.6l15.6-3.1.7 3.4L3.9 9z"/></svg>
+                            </div>
+                            <div class="space-y-1">
+                                <h4 class="text-xs font-mono uppercase text-brandBlue font-bold tracking-wider">Film Trivia & Fun Fact</h4>
+                                <p class="text-xs md:text-sm text-text font-sans leading-relaxed">${entry.funFact}</p>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <!-- PREVIOUS / NEXT ENTRY NAVIGATION -->
+                    <div class="flex items-center justify-between pt-8 border-t border-border text-xs font-mono">
+                        <button onclick="navigateToEntry('${prevEntry.id}')" class="flex items-center space-x-2 text-muted hover:text-brandBlue transition-colors group text-left">
+                            <svg class="transition-transform group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                            <div>
+                                <div class="text-[10px] uppercase text-muted">Previous</div>
+                                <div class="text-white font-serif font-bold line-clamp-1">${prevEntry.filmTitle}</div>
+                            </div>
+                        </button>
+                        
+                        <button onclick="navigateToEntry('${nextEntry.id}')" class="flex items-center space-x-2 text-muted hover:text-brandBlue transition-colors group text-right">
+                            <div>
+                                <div class="text-[10px] uppercase text-muted">Next</div>
+                                <div class="text-white font-serif font-bold line-clamp-1">${nextEntry.filmTitle}</div>
+                            </div>
+                            <svg class="transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+
+                    <!-- NEWSLETTER SIGNUP (ENTRY BOTTOM) -->
+                    <div class="pt-8 border-t border-border">
+                        ${renderCinemaTicket(`entry-bottom-newsletter-${entry.id}`)}
+                    </div>
+                </article>
+            `;
+        }
+
+        /**
+         * ROUTER CONTROLLER
+         */
+        function router() {
+            const app = document.getElementById('app-content');
+            const hash = window.location.hash || '#home';
+
+            // Scroll to top on navigation
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (hash === '#home' || hash === '') {
+                app.innerHTML = renderHome();
+            } else if (hash === '#diary') {
+                app.innerHTML = renderDiary();
+            } else if (hash === '#lists') {
+                app.innerHTML = renderLists();
+            } else if (hash.startsWith('#film-')) {
+                const entryId = hash.replace('#', '');
+                app.innerHTML = renderFilmEntry(entryId);
+            } else {
+                app.innerHTML = renderHome();
+            }
+            fitInfographics();
+        }
+
+        // Scale fixed-size infographic posters to fit their frame
+        function fitInfographics() {
+            document.querySelectorAll('.infographic-frame').forEach(frame => {
+                const poster = frame.querySelector('.infographic-poster');
+                if (poster && frame.clientWidth) poster.style.transform = 'scale(' + (frame.clientWidth / 1123) + ')';
+            });
+        }
+        window.addEventListener('resize', fitInfographics);
+
+        // Initialize App
+        window.addEventListener('hashchange', router);
+        window.addEventListener('load', () => {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            router();
+        });
+    </script>
+</body>
+</html>
