@@ -275,7 +275,7 @@
                 rating: 5.0,
                 watched: true,
                 liked: true,
-                rewatched: false,
+                rewatched: true,
                 posterImg: "",
                 svgFallback: `
                     <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -509,7 +509,7 @@
                 rating: 5.0,
                 watched: true,
                 liked: true,
-                rewatched: false,
+                rewatched: true,
                 posterImg: "",
                 svgFallback: `
                     <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -892,6 +892,23 @@
 
         // Render Lists Page View
         function renderLists() {
+            // Mini poster row for a list, built from the real entries
+            const listPosters = (ids) => `
+                <div class="flex flex-wrap items-start gap-4 pt-3">
+                    ${ids.map(id => {
+                        const e = BLOG_ENTRIES.find(x => x.id === id);
+                        if (!e) return '';
+                        return `
+                            <button type="button" onclick="navigateToEntry('${e.id}')" class="group text-left w-20" title="${e.filmTitle} (${e.year})">
+                                <div class="w-20 aspect-[2/3] rounded overflow-hidden relative bg-panel border border-border shadow-md transition-all duration-300 group-hover:border-brandBlue group-hover:-translate-y-0.5">
+                                    ${e.posterImg ? `<img src="${e.posterImg}" alt="${e.filmTitle}" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />` : ''}
+                                    <div class="${e.posterImg ? 'hidden' : ''} absolute inset-0 z-0">${e.svgFallback}</div>
+                                </div>
+                                <div class="mt-1.5 text-[10px] leading-tight font-mono text-muted group-hover:text-white transition-colors">${e.filmTitle} <span class="opacity-60">(${e.year})</span></div>
+                            </button>`;
+                    }).join('')}
+                </div>`;
+
             return `
                 <div class="max-w-4xl mx-auto space-y-8">
                     <div class="border-b border-border pb-4">
@@ -904,20 +921,21 @@
                             <div class="text-xs font-mono text-brandBlue uppercase tracking-wider font-bold">List #01</div>
                             <h2 class="text-xl font-serif font-bold text-white">Cinema for Personal Productivity</h2>
                             <p class="text-xs text-muted">Films that inspire daily habit building, relentless work ethic, and deep focus.</p>
-                            <div class="flex -space-x-2 pt-2">
-                                <div class="w-8 h-12 bg-blue-900 border border-bg rounded"></div>
-                                <div class="w-8 h-12 bg-amber-900 border border-bg rounded"></div>
-                            </div>
+                            ${listPosters(['film-1', 'film-2'])}
                         </div>
 
                         <div class="bg-panel border border-border rounded-xl p-6 space-y-3 hover:border-brandPink transition-colors">
                             <div class="text-xs font-mono text-brandPink uppercase tracking-wider font-bold">List #02</div>
                             <h2 class="text-xl font-serif font-bold text-white">Critical Thinking & Autonomy</h2>
                             <p class="text-xs text-muted">Stories that challenge public consensus, dogma, and mental passive consumption.</p>
-                            <div class="flex -space-x-2 pt-2">
-                                <div class="w-8 h-12 bg-red-950 border border-bg rounded"></div>
-                                <div class="w-8 h-12 bg-stone-900 border border-bg rounded"></div>
-                            </div>
+                            ${listPosters(['film-5', 'film-4'])}
+                        </div>
+
+                        <div class="bg-panel border border-border rounded-xl p-6 space-y-3 hover:border-brandAmber transition-colors">
+                            <div class="text-xs font-mono text-brandAmber uppercase tracking-wider font-bold">List #03</div>
+                            <h2 class="text-xl font-serif font-bold text-white">Cinema as Craft</h2>
+                            <p class="text-xs text-muted">Original filmmaking experiments, where style, framing, and sound do the storytelling.</p>
+                            ${listPosters(['film-3'])}
                         </div>
                     </div>
                 </div>
