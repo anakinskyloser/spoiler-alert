@@ -1053,7 +1053,7 @@
         const PROFILE = {
             name: "Sunny Khai",
             greeting: "hi, i'm",
-            photo: "",
+            photo: "https://github.com/anakinskyloser/spoiler-alert/blob/main/spoileralertpfp.jpeg?raw=true",
             aboutMe: "i just like to watch movies and live vicariously through them.",
             aboutSite: [
                 "spoiler alert started as a project for my internet technology in communication (multimedia & broadcasting) assignment. inspired by letterboxd, i built this website to practise putting a website together from scratch: the layout, the writing, the design, and making it feel like a place people might actually want to visit.",
@@ -1061,9 +1061,9 @@
             ],
             socials: [
                 { name: "Portfolio", handle: "your portfolio", url: "#", color: "text-white", icon: '<path d="M3 8h18v12H3zM9 8V5h6v3M3 13h18"/>' },
-                { name: "Spotify", handle: "your spotify", url: "#", color: "text-brandBlue", icon: '<path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zM21 16a3 3 0 11-6 0 3 3 0 016 0z"/>' },
-                { name: "Discord", handle: "your discord", url: "#", color: "text-brandPink", icon: '<path d="M21 12a8 8 0 01-11.6 7.1L3 21l1.9-5.4A8 8 0 1121 12z"/>' },
-                { name: "Instagram", handle: "your instagram", url: "#", color: "text-brandAmber", icon: '<path d="M4 8h3l2-3h6l2 3h3v11H4zM12 17a4 4 0 100-8 4 4 0 000 8z"/>' }
+                { name: "Spotify", handle: "my spotify profile", url: "https://open.spotify.com/user/31ncmwsorzlh3dtrjz2jrmj2spja", color: "text-brandBlue", icon: '<path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zM21 16a3 3 0 11-6 0 3 3 0 016 0z"/>' },
+                { name: "Discord", handle: "@pherom0n3s", url: "https://discord.com/users/1374755818972512386", color: "text-brandPink", icon: '<path d="M21 12a8 8 0 01-11.6 7.1L3 21l1.9-5.4A8 8 0 1121 12z"/>' },
+                { name: "Instagram", handle: "@pherom0n3s", url: "https://www.instagram.com/pherom0n3s", color: "text-brandAmber", icon: '<path d="M4 8h3l2-3h6l2 3h3v11H4zM12 17a4 4 0 100-8 4 4 0 000 8z"/>' }
             ]
         };
 
@@ -1094,7 +1094,7 @@
                 <div class="max-w-4xl mx-auto space-y-8">
                     <!-- PROFILE HEADER -->
                     <div class="flex flex-col md:flex-row items-center md:items-start gap-8 border-b border-border pb-8">
-                        <div class="w-36 h-36 md:w-40 md:h-40 rounded-full overflow-hidden bg-panel border-2 border-dashed border-border flex-shrink-0">
+                        <div class="w-36 h-36 md:w-40 md:h-40 rounded-full overflow-hidden bg-panel border-2 ${PROFILE.photo ? 'border-border' : 'border-dashed border-border'} flex-shrink-0">
                             ${photo}
                         </div>
                         <div class="flex-grow text-center md:text-left space-y-3">
