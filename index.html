@@ -37,8 +37,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400&family=Amiri:wght@700&display=swap" rel="stylesheet">
     
     <style>
         /* Custom Styles & Film Grain */
@@ -63,11 +62,6 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* Ticket Notch styling */
-        .ticket-notch-left {
-            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-        }
-        
         .spoiler-text {
             filter: blur(8px);
             transition: filter 0.3s ease, background 0.3s ease;
@@ -124,7 +118,6 @@
     <!-- GLOBAL FOOTER -->
     <footer class="border-t border-border bg-panel py-12 mt-16">
         <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-8">
-            <!-- Footer Branding -->
             <div class="flex flex-col items-center md:items-start text-center md:text-left">
                 <a href="#home" onclick="event.preventDefault(); navigateToHash('#home');" class="flex flex-col items-center md:items-start group mb-3">
                     <svg width="50" height="18" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
@@ -144,20 +137,8 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        /**
-         * ====================================================================
-         * CONFIGURATION & DATA SOURCE
-         * Edit entries, image paths, video embeds, and Formspree URL here.
-         * ====================================================================
-         */
-
-        // Formspree Endpoint for Newsletter
         const FORMSPREE_URL = "https://formspree.io/f/xaeevepg";
 
-        /**
-         * BLOG ENTRIES DATASET
-         * Edit entries, text content, image paths, and video embeds here.
-         */
         const BLOG_ENTRIES = [
             {
                 id: "film-1",
@@ -205,10 +186,9 @@
                     <p>Cap never fought Hydra alone; he assembled a specialized squad of trusted allies like Bucky Barnes, Gabe Jones, and Dum Dum Dugan. Habits do not survive in isolation. Surrounding yourself with peers who normalize discipline makes health an identity rather than a grueling chore.</p>
                     <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">5. "I Can Do This All Day" (Pacing & Longevity)</h3>
                     <p>Steve’s catchphrase isn't about arrogance; it’s an ethos of steady endurance. Avoid burnout by adopting sustainable micro-habits that you can realistically maintain for the next decade. Real victory lies in continuous, unbroken streak building.</p>
-                
-    <p>There is another lesson in the way Steve approaches setbacks: he does not confuse a temporary limitation with a permanent identity. The people around him repeatedly judge what he cannot do, but he keeps his attention on the values he can practise right now. That distinction matters when building a routine. You may not be able to complete a long workout, study for three hours, or change every meal in one day. You can still take a short walk, review a few pages, or prepare one nourishing option. Small actions are not meaningless simply because they look ordinary.</p>
-    <p>It is also important to remember that discipline should not become punishment. Steve's determination is inspiring, but a healthy routine needs rest, flexibility, and room for real life. Missing one day does not erase previous effort. The useful response is to begin again instead of turning one interruption into a reason to quit. Think of the serum as the dramatic part of the story, not the everyday plan. The everyday plan is the quiet decision to keep practising, make the next helpful choice, and build a life that can support you over time.</p>
-    `,
+                    <p>There is another lesson in the way Steve approaches setbacks: he does not confuse a temporary limitation with a permanent identity. The people around him repeatedly judge what he cannot do, but he keeps his attention on the values he can practise right now. That distinction matters when building a routine. You may not be able to complete a long workout, study for three hours, or change every meal in one day. You can still take a short walk, review a few pages, or prepare one nourishing option. Small actions are not meaningless simply because they look ordinary.</p>
+                    <p>It is also important to remember that discipline should not become punishment. Steve's determination is inspiring, but a healthy routine needs rest, flexibility, and room for real life. Missing one day does not erase previous effort. The useful response is to begin again instead of turning one interruption into a reason to quit. Think of the serum as the dramatic part of the story, not the everyday plan. The everyday plan is the quiet decision to keep practising, make the next helpful choice, and build a life that can support you over time.</p>
+                `,
                 funFact: "Chris Evans declined the role of Captain America three times due to anxiety about fame before Robert Downey Jr. personally called him and convinced him to take the part!"
             },
             {
@@ -232,7 +212,6 @@
                             </linearGradient>
                         </defs>
                         <rect width="100%" height="100%" fill="url(#gwh-bg)"/>
-                        <!-- Chalkboard Mathematical Equations -->
                         <g opacity="0.2" stroke="#f5f5f4" stroke-width="1.5" fill="none" font-family="monospace" font-size="12">
                             <path d="M 30,60 Q 90,20 150,60 T 270,60" />
                             <text x="40" y="100">f(x) = ∫ e^(-x²) dx</text>
@@ -260,11 +239,10 @@
                     <p>Robin Williams' character, Dr. Sean Maguire, delivers a masterclass on the limits of book smarts: <em>"If I ask you about art, you'd probably give me the skinny on every art book ever written... but I bet you can't tell me what it smells like in the Sistine Chapel."</em> Connect abstract concepts to emotional, real-world experiences to lock them into long-term memory banks.</p>
                     <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">4. Breaking Through Cognitive Defense Mechanisms</h3>
                     <p>Will used obscure intellectual facts as armor to keep people at a distance. When studying complex subjects, we often collect bookmarks and saved articles to feel productive without doing the hard work of deep comprehension. True learning happens when you drop the armor and wrestle directly with difficult ideas.</p>
-                
-    <p>Another useful part of Will's story is the difference between being able to answer a question and being able to use what you know. A person may remember definitions perfectly but still struggle to recognize when an idea applies outside a classroom. To close that gap, try connecting every new concept to a concrete example. After reading a chapter, describe where the idea might appear in daily life, explain why it matters, and identify a situation in which it might not apply. This turns learning into a process of interpretation rather than a race to collect facts.</p>
-    <p>Will also reminds us that intelligence is not the same as emotional maturity. His talent gives him opportunities, but it cannot make difficult decisions for him or automatically repair his relationships. In the same way, academic achievement does not remove the need for patience, curiosity, and honest self-reflection. A strong learner should be willing to say, “I do not understand this yet,” and ask for help without treating that admission as failure. Mentors, classmates, teachers, and friends can challenge our assumptions in ways that solitary reading cannot.</p>
-    <p>A practical routine inspired by the film could be simple: study a small section, close the material, write down what you remember, and explain the main idea in your own words. Return to it later and test yourself again. When an answer is incomplete, use the gap to decide what to review next. The goal is not to imitate Will's extraordinary memory. It is to become more thoughtful about what you learn, how you apply it, and how willing you are to let new experiences change your understanding.</p>
-    `,
+                    <p>Another useful part of Will's story is the difference between being able to answer a question and being able to use what you know. A person may remember definitions perfectly but still struggle to recognize when an idea applies outside a classroom. To close that gap, try connecting every new concept to a concrete example. After reading a chapter, describe where the idea might appear in daily life, explain why it matters, and identify a situation in which it might not apply. This turns learning into a process of interpretation rather than a race to collect facts.</p>
+                    <p>Will also reminds us that intelligence is not the same as emotional maturity. His talent gives him opportunities, but it cannot make difficult decisions for him or automatically repair his relationships. In the same way, academic achievement does not remove the need for patience, curiosity, and honest self-reflection. A strong learner should be willing to say, “I do not understand this yet,” and ask for help without treating that admission as failure. Mentors, classmates, teachers, and friends can challenge our assumptions in ways that solitary reading cannot.</p>
+                    <p>A practical routine inspired by the film could be simple: study a small section, close the material, write down what you remember, and explain the main idea in your own words. Return to it later and test yourself again. When an answer is incomplete, use the gap to decide what to review next. The goal is not to imitate Will's extraordinary memory. It is to become more thoughtful about what you learn, how you apply it, and how willing you are to let new experiences change your understanding.</p>
+                `,
                 funFact: "Robin Williams' poignant story about his wife farting in her sleep was completely improvised on the spot, causing Matt Damon to laugh hysterically and the camera operator to shake the shot!"
             },
             {
@@ -281,30 +259,21 @@
                 posterImg: "",
                 svgFallback: `
                     <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                        <!-- Pastel backdrop -->
                         <rect width="300" height="450" fill="#f7c6d0"/>
                         <rect y="270" width="300" height="180" fill="#bfe3d0"/>
                         <rect y="268" width="300" height="4" fill="#e9b44c"/>
-
-                        <!-- Symmetrical campus facade -->
                         <rect x="50" y="110" width="200" height="158" fill="#fbe9a6" stroke="#8a5a44" stroke-width="3"/>
                         <rect x="50" y="100" width="200" height="14" fill="#e9b44c" stroke="#8a5a44" stroke-width="3"/>
                         <polygon points="150,62 112,100 188,100" fill="#f4a9b8" stroke="#8a5a44" stroke-width="3"/>
                         <circle cx="150" cy="86" r="7" fill="#fbe9a6" stroke="#8a5a44" stroke-width="2"/>
-
-                        <!-- Three arches -->
                         <path d="M64 268 V196 A16 16 0 0 1 96 196 V268 Z" fill="#7fb7a4" stroke="#8a5a44" stroke-width="3"/>
                         <path d="M134 268 V176 A16 16 0 0 1 166 176 V268 Z" fill="#5f9d89" stroke="#8a5a44" stroke-width="3"/>
                         <path d="M204 268 V196 A16 16 0 0 1 236 196 V268 Z" fill="#7fb7a4" stroke="#8a5a44" stroke-width="3"/>
                         <rect x="62" y="136" width="36" height="22" fill="#f7c6d0" stroke="#8a5a44" stroke-width="2"/>
                         <rect x="202" y="136" width="36" height="22" fill="#f7c6d0" stroke="#8a5a44" stroke-width="2"/>
                         <rect x="132" y="136" width="36" height="22" fill="#f7c6d0" stroke="#8a5a44" stroke-width="2"/>
-
-                        <!-- Centre pavement line -->
                         <polygon points="136,270 164,270 190,330 110,330" fill="#f7e3c4" stroke="#8a5a44" stroke-width="2"/>
                         <rect x="110" y="330" width="80" height="4" fill="#e9b44c"/>
-
-                        <!-- Student, dead centre -->
                         <circle cx="150" cy="222" r="9" fill="#8a5a44"/>
                         <rect x="141" y="232" width="18" height="30" rx="4" fill="#d96b7c"/>
                         <rect x="143" y="262" width="5" height="12" fill="#3f3b5a"/>
@@ -313,14 +282,10 @@
                         <path d="M159 236 L168 256" stroke="#e9b44c" stroke-width="3" stroke-linecap="round" fill="none"/>
                         <rect x="127" y="254" width="12" height="14" rx="2" fill="#fbe9a6" stroke="#8a5a44" stroke-width="2"/>
                         <rect x="161" y="254" width="12" height="14" rx="2" fill="#fbe9a6" stroke="#8a5a44" stroke-width="2"/>
-
-                        <!-- Symmetrical potted plants -->
                         <rect x="36" y="250" width="12" height="18" fill="#d96b7c"/>
                         <circle cx="42" cy="244" r="9" fill="#5f9d89"/>
                         <rect x="252" y="250" width="12" height="18" fill="#d96b7c"/>
                         <circle cx="258" cy="244" r="9" fill="#5f9d89"/>
-
-                        <!-- Typography -->
                         <rect x="40" y="352" width="220" height="64" fill="#fdf6e3" stroke="#8a5a44" stroke-width="3"/>
                         <rect x="46" y="358" width="208" height="52" fill="none" stroke="#e9b44c" stroke-width="1.5"/>
                         <text x="150" y="384" font-family="'Playfair Display', serif" font-weight="800" font-size="22" fill="#8a5a44" text-anchor="middle" letter-spacing="3">LIFE AT KIGS</text>
@@ -335,41 +300,9 @@
                     <p class="lead text-lg text-white font-serif">Director's Notes: Translating symmetrical cinema to campus life.</p>
                     <p>Instead of standard handheld vlog cuts, this 90-second visual essay captures a regular Bruneian student's life at KIGS Brunei by turning daily routines at Kolej IGS into an exercise in rigid symmetry, flat grid layouts, and snappy camera work. The goal was simple: take the mundane rhythm of college life (arriving at campus, taking notes, reading in the library) and frame it through the whimsical, meticulously structured lens of Wes Anderson.</p>
                     <p>Filmed entirely on an iPhone 13 using Cinematic Mode at 24fps, the project relies on dead-center framing, pastel color-matching around Kiulap, and sharp 90-degree whip-pans to replace traditional narrative pacing.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">Shot List &amp; Timing</h3>
-                    <ul class="list-disc list-inside space-y-3 my-4 text-muted">
-                        <li><strong class="text-white">0:00 &ndash; 0:20 | The Centered Arrival</strong>
-                            <ul class="list-disc list-inside ml-5 mt-1 space-y-1">
-                                <li><strong class="text-white">Visual:</strong> Dead-center, eye-level shot in front of the main KIGS building arches. You walk straight toward the camera down the middle pavement line, stop dead-center in the frame, adjust your tote bag straps symmetrically, and stare into the lens.</li>
-                                <li><strong class="text-white">Audio:</strong> Solitary footsteps on tile, followed by a punchy, retro 60s acoustic guitar strum.</li>
-                            </ul>
-                        </li>
-                        <li><strong class="text-white">0:20 &ndash; 0:40 | The Overhead Study Layout</strong>
-                            <ul class="list-disc list-inside ml-5 mt-1 space-y-1">
-                                <li><strong class="text-white">Visual:</strong> Flat 90-degree overhead lay of a common room table. Your notebook rests in the exact middle, flanked evenly by a pastel pen on the left and an iced coffee on the right. Hands enter from the bottom, uncap the pen, underline a title, and freeze.</li>
-                                <li><strong class="text-white">Audio:</strong> Tactile pen-cap click synced to a crisp drum rimshot.</li>
-                            </ul>
-                        </li>
-                        <li><strong class="text-white">0:40 &ndash; 1:00 | The Library Whip-Pan</strong>
-                            <ul class="list-disc list-inside ml-5 mt-1 space-y-1">
-                                <li><strong class="text-white">Visual:</strong> The camera locks onto a flat bookshelf wall. A fast 90-degree whip-pan snaps to a symmetrical wide shot of a reading desk down the library aisle, where you sit perfectly upright holding an open textbook.</li>
-                                <li><strong class="text-white">Audio:</strong> Quick swish camera sound snapping into a light, whimsical bell melody.</li>
-                            </ul>
-                        </li>
-                        <li><strong class="text-white">1:00 &ndash; 1:30 | Campus Sign-Off &amp; Fade</strong>
-                            <ul class="list-disc list-inside ml-5 mt-1 space-y-1">
-                                <li><strong class="text-white">Visual:</strong> Symmetrical framing of a campus corridor. You step into the center frame, check a vintage pocket calendar, close it shut, and exit straight left. The camera holds on the empty corridor before fading to black.</li>
-                                <li><strong class="text-white">Audio:</strong> Book-snap sound effect, with the background track swelling briefly before cutting on a final woodblock tap.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">Behind the Scenes &amp; Setup</h3>
-                    <ul class="list-disc list-inside space-y-2 my-4 text-muted">
-                        <li><strong class="text-white">Grid Alignment:</strong> Shot using the iPhone camera grid overlay (<code>Settings &gt; Camera &gt; Grid</code>) to ensure every vertical building line and doorframe aligned perfectly straight without tilt.</li>
-                        <li><strong class="text-white">Camera Rules:</strong> Zero diagonal or handheld motion. Every frame used static locked-off setups propped against flat surfaces, paired with flat, high-speed 90-degree whip-pans.</li>
-                        <li><strong class="text-white">Color Grade:</strong> Slightly lowered exposure to lock in saturated warm pastels, mint greens, and soft yellows across the campus architecture.</li>
-                    </ul>
-    `,
-                funFact: "Wes Anderson's famous dead-center framing is not just an artistic quirk; he has used vintage anamorphic lenses, like the Panavision C-Series, whose slight distortion at the edges naturally pulls your eyes straight to the middle of the frame!"            },
+                `,
+                funFact: "Wes Anderson's famous dead-center framing is not just an artistic quirk; he has used vintage anamorphic lenses, like the Panavision C-Series, whose slight distortion at the edges naturally pulls your eyes straight to the middle of the frame!"
+            },
             {
                 id: "film-4",
                 title: "Ecology, Consumption & Digital Overconsumption",
@@ -384,57 +317,39 @@
                 posterImg: "",
                 svgFallback: `
                     <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                        <!-- Dusty sky bands -->
                         <rect width="300" height="450" fill="#0f172a"/>
                         <rect y="90" width="300" height="70" fill="#2a2440"/>
                         <rect y="150" width="300" height="60" fill="#7c3a2d"/>
                         <rect y="200" width="300" height="60" fill="#c2611f"/>
                         <rect y="250" width="300" height="60" fill="#e89a2e"/>
                         <circle cx="228" cy="262" r="34" fill="#fcd34d" opacity="0.85"/>
-
-                        <!-- Stars -->
                         <circle cx="50" cy="40" r="1.5" fill="#fff" opacity="0.8"/>
                         <circle cx="120" cy="70" r="1.2" fill="#fff" opacity="0.7"/>
                         <circle cx="262" cy="45" r="1.5" fill="#fff" opacity="0.8"/>
                         <circle cx="205" cy="100" r="1" fill="#fff" opacity="0.6"/>
-
-                        <!-- Distant trash towers -->
                         <polygon points="0,300 0,250 18,250 18,232 40,232 40,262 62,262 62,240 84,240 84,300" fill="#4a2c1a"/>
                         <polygon points="216,300 216,255 238,255 238,225 262,225 262,248 284,248 284,235 300,235 300,300" fill="#4a2c1a"/>
-
-                        <!-- Ground -->
                         <rect y="300" width="300" height="150" fill="#3b2314"/>
                         <rect y="300" width="300" height="4" fill="#5c3a21"/>
                         <rect x="14" y="318" width="22" height="16" fill="#6b4226"/>
                         <rect x="40" y="326" width="14" height="10" fill="#57361f"/>
                         <rect x="250" y="320" width="24" height="18" fill="#6b4226"/>
                         <rect x="228" y="330" width="14" height="10" fill="#57361f"/>
-
-                        <!-- EVE flying in the sky -->
                         <g transform="translate(70, 95) rotate(-12)">
                             <ellipse cx="0" cy="0" rx="13" ry="19" fill="#f8fafc"/>
                             <ellipse cx="0" cy="-5" rx="8" ry="5" fill="#0f172a"/>
                             <ellipse cx="-3" cy="-5" rx="1.6" ry="2.4" fill="#38bdf8"/>
                             <ellipse cx="3" cy="-5" rx="1.6" ry="2.4" fill="#38bdf8"/>
                         </g>
-
-                        <!-- WALL-E -->
-                        <!-- Ground shadow -->
                         <ellipse cx="150" cy="338" rx="68" ry="6" fill="#000" opacity="0.35"/>
-
-                        <!-- Treads -->
                         <rect x="92" y="296" width="32" height="42" rx="12" fill="#2b3340"/>
                         <rect x="176" y="296" width="32" height="42" rx="12" fill="#2b3340"/>
                         <circle cx="108" cy="308" r="6" fill="#4b5563"/>
                         <circle cx="108" cy="328" r="6" fill="#4b5563"/>
                         <circle cx="192" cy="308" r="6" fill="#4b5563"/>
                         <circle cx="192" cy="328" r="6" fill="#4b5563"/>
-
-                        <!-- Neck -->
                         <rect x="144" y="192" width="12" height="36" fill="#6b7280"/>
                         <rect x="141" y="205" width="18" height="5" fill="#4b5563"/>
-
-                        <!-- Body box -->
                         <rect x="106" y="224" width="88" height="76" rx="6" fill="#d9941f" stroke="#78350f" stroke-width="3"/>
                         <rect x="106" y="224" width="88" height="14" rx="4" fill="#b87a14"/>
                         <rect x="116" y="248" width="34" height="14" rx="2" fill="#1e293b"/>
@@ -444,23 +359,15 @@
                         <rect x="158" y="264" width="26" height="4" fill="#92400e"/>
                         <circle cx="122" cy="282" r="3" fill="#92400e"/>
                         <circle cx="178" cy="286" r="4" fill="#a16207"/>
-
-                        <!-- Left arm -->
                         <path d="M106 254 L84 276" stroke="#6b7280" stroke-width="7" stroke-linecap="round" fill="none"/>
                         <circle cx="82" cy="279" r="6" fill="#4b5563"/>
-
-                        <!-- Right arm holding seedling -->
                         <path d="M194 254 L214 268" stroke="#6b7280" stroke-width="7" stroke-linecap="round" fill="none"/>
                         <circle cx="216" cy="270" r="6" fill="#4b5563"/>
-
-                        <!-- Seedling in boot -->
                         <rect x="208" y="272" width="18" height="15" rx="2" fill="#78350f"/>
                         <rect x="206" y="271" width="22" height="4" rx="1" fill="#5b2a0c"/>
                         <path d="M217 271 L217 258" stroke="#16a34a" stroke-width="2" fill="none"/>
                         <path d="M217 261 Q207 258 205 250 Q215 251 217 261 Z" fill="#22c55e"/>
                         <path d="M217 259 Q227 256 230 247 Q219 249 217 259 Z" fill="#16a34a"/>
-
-                        <!-- Binocular eyes -->
                         <rect x="138" y="176" width="24" height="12" fill="#6b7280"/>
                         <g transform="rotate(-8 122 176)">
                             <rect x="98" y="158" width="46" height="36" rx="12" fill="#a8b0bc" stroke="#475569" stroke-width="2.5"/>
@@ -476,8 +383,6 @@
                             <circle cx="179" cy="176" r="4" fill="#0f172a"/>
                             <circle cx="175" cy="172" r="2.5" fill="#fff" opacity="0.85"/>
                         </g>
-
-                        <!-- Typography -->
                         <text x="150" y="385" font-family="'Playfair Display', serif" font-weight="800" font-size="30" fill="#ffffff" text-anchor="middle" letter-spacing="4">WALL&bull;E</text>
                         <text x="150" y="410" font-family="sans-serif" font-weight="600" font-size="10" fill="#fcd34d" text-anchor="middle" letter-spacing="4">DISNEY &bull; PIXAR</text>
                     </svg>
@@ -488,17 +393,7 @@
                 content: `
                     <p class="lead text-lg text-white font-serif">WALL-E spent 700 years compacting garbage on an abandoned Earth, while humans hovered in floating chairs sipping meals through straws. Pixar didn't just warn us about trash—they predicted digital paralysis.</p>
                     <p>Andrew Stanton’s masterpiece <em>WALL-E</em> remains one of cinema's sharpest critiques of consumerism and environmental neglect. But beneath the rusted robot romance lies a critical warning about how convenience can quietly erode our health, critical thinking, and connection to nature.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">1. The Danger of Frictionless Living</h3>
-                    <p>On board the Axiom, every human need is met instantly by Buy n Large algorithms. Hover chairs move people automatically, screens hover inches from faces, and food is processed into uniform liquids. The result? Muscle atrophy, complete lack of physical orientation, and blindness to the person sitting right beside them. When we eliminate all physical and mental friction from life, we eliminate the very stimulus that keeps us resilient.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">2. Curating Beauty in the Trash (WALL-E's Collection)</h3>
-                    <p>While humans with infinite resources consume mindlessly, WALL-E finds deep wonder in discarded objects—a Rubik's cube, a glowing lightbulb, an old VHS tape of <em>Hello, Dolly!</em>. Environmental stewardship and mental peace start with appreciating what already exists in our space rather than constantly chasing the next upgraded product.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">3. The Plant in the Boot (Micro-Restoration)</h3>
-                    <p>Earth wasn't saved by a massive planetary engine; it was saved because one tiny robot protected one fragile green seedling inside a discarded leather boot. Global environmental challenges feel overwhelming, but systemic restoration always begins with localized micro-actions: planting a garden, reducing single-use plastics, and honoring nature.</p>
-                
-    <p>The film's contrast between the crowded, automated Axiom and the abandoned Earth makes its environmental message easy to understand. The problem is not technology by itself; it is the habit of using convenience without considering its consequences. A product can save time and still create waste. A screen can connect people and still distract them from the world around them. The film asks viewers to look beyond the immediate comfort of a purchase or service and consider the longer chain of materials, energy, habits, and disposal that follows.</p>
-    <p>Its message about consumption can be applied to digital life as well. Endless scrolling encourages us to move from one piece of content to another without pausing to ask whether any of it is useful. Recommendation systems can make the next video or product feel effortless to access, but effortless access does not always mean genuine satisfaction. Choosing what deserves our attention is a form of responsibility. We can set boundaries around screen time, unsubscribe from accounts that encourage unnecessary buying, and make space for activities that involve movement, creativity, or direct contact with other people.</p>
-    <p>WALL-E's careful collection of objects offers a quieter alternative to constant replacement. Repairing something, reusing a container, borrowing an item, or choosing a product that lasts longer may seem like small decisions, but they change the relationship we have with our belongings. These actions are not a complete solution to large environmental problems, and individuals cannot carry the whole responsibility alone. Businesses, communities, and governments also shape the systems in which people make choices. Still, personal habits can support wider change and help us notice that a more meaningful life does not always require more things.</p>
-    `,
+                `,
                 funFact: "Legendary sound designer Ben Burtt created over 2,400 distinct sound effects for WALL-E using real-world objects like slinkys, canvas bags, and generator motors—the most of any film in movie history!"
             },
             {
@@ -515,55 +410,35 @@
                 posterImg: "",
                 svgFallback: `
                     <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                        <!-- Desert dusk sky -->
                         <rect width="300" height="450" fill="#0b0f1a"/>
                         <rect y="120" width="300" height="70" fill="#2b1620"/>
                         <rect y="185" width="300" height="55" fill="#5a2418"/>
                         <rect y="235" width="300" height="45" fill="#a8441a"/>
                         <rect y="275" width="300" height="30" fill="#e08a24"/>
-
-                        <!-- Stars -->
                         <circle cx="40" cy="38" r="1.4" fill="#fff" opacity="0.8"/>
                         <circle cx="118" cy="62" r="1.1" fill="#fff" opacity="0.6"/>
                         <circle cx="205" cy="30" r="1.5" fill="#fff" opacity="0.8"/>
                         <circle cx="262" cy="78" r="1.1" fill="#fff" opacity="0.6"/>
-
-                        <!-- Burning oil well smoke -->
                         <ellipse cx="62" cy="215" rx="20" ry="78" fill="#07070a" opacity="0.75"/>
                         <ellipse cx="72" cy="150" rx="34" ry="30" fill="#07070a" opacity="0.6"/>
                         <ellipse cx="238" cy="225" rx="16" ry="68" fill="#07070a" opacity="0.7"/>
                         <ellipse cx="246" cy="170" rx="28" ry="24" fill="#07070a" opacity="0.55"/>
-
-                        <!-- Far dunes -->
                         <path d="M0 300 Q70 284 150 298 T300 292 L300 450 L0 450 Z" fill="#2a1609"/>
-
-                        <!-- Oil fires -->
                         <path d="M54 296 Q50 278 58 262 Q60 276 66 270 Q70 284 72 296 Z" fill="#f97316"/>
                         <path d="M58 296 Q57 284 62 276 Q65 286 67 296 Z" fill="#fde047"/>
                         <path d="M231 296 Q228 282 234 268 Q237 280 242 274 Q246 286 246 296 Z" fill="#f97316"/>
                         <path d="M235 296 Q234 287 238 280 Q241 288 242 296 Z" fill="#fde047"/>
-
-                        <!-- Foreground dune -->
                         <path d="M0 338 Q150 306 300 340 L300 450 L0 450 Z" fill="#1f1208"/>
-
-                        <!-- Marine silhouette -->
                         <g fill="#050505" stroke="none">
-                            <!-- Helmet -->
                             <path d="M129 208 Q127 176 150 175 Q173 176 171 208 Z"/>
                             <rect x="124" y="205" width="52" height="5" rx="2"/>
-                            <!-- Head and neck -->
                             <rect x="136" y="210" width="28" height="16" rx="6"/>
                             <rect x="144" y="224" width="12" height="8"/>
-                            <!-- Shoulders and torso -->
                             <path d="M112 262 Q114 232 150 230 Q186 232 188 262 L192 345 L108 345 Z"/>
                         </g>
-                        <!-- Rifle held upright -->
                         <path d="M196 232 L180 346" stroke="#050505" stroke-width="5" stroke-linecap="round" fill="none"/>
                         <path d="M200 214 L196 232" stroke="#050505" stroke-width="3" stroke-linecap="round" fill="none"/>
-                        <!-- Rim light on helmet -->
                         <path d="M133 196 Q138 180 152 178" stroke="#e08a24" stroke-width="1.5" fill="none" opacity="0.7"/>
-
-                        <!-- Typography -->
                         <text x="150" y="392" font-family="'Playfair Display', serif" font-weight="800" font-size="32" fill="#ffffff" text-anchor="middle" letter-spacing="5">JARHEAD</text>
                         <text x="150" y="416" font-family="sans-serif" font-weight="600" font-size="10" fill="#f59e0b" text-anchor="middle" letter-spacing="4">WAITING FOR A WAR</text>
                     </svg>
@@ -573,18 +448,7 @@
                 spoiler: "Swofford trains for one shot he never gets to take. The film's real argument is that the deepest cost of obeying a system is not a wound, but a mind that keeps waiting for orders long after the war is over.",
                 content: `
                     <p class="lead text-lg text-white font-serif">Jarhead is a war movie in which almost nothing happens, and that is exactly why it is such a sharp film about autonomy. It asks who gets to decide what you do, what you feel, and what your story means.</p>
-                    <p>Sam Mendes' 2005 adaptation of Anthony Swofford's 2003 memoir follows a young Marine through the buildup to the Gulf War. Most of the film is spent on training, heat, boredom, and waiting for a fight that arrives late and ends quickly. Instead of battlefield heroics, it shows what happens to a person when an institution makes nearly every decision for them.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">1. Who Writes the Script for How You Feel?</h3>
-                    <p>In one of the film's best-known scenes, the Marines gather to watch the helicopter attack from <em>Apocalypse Now</em> and cheer along with the music, even though many viewers read that sequence as a warning about war rather than a celebration of it. The moment shows how easily a group can absorb a ready-made reaction. Nobody in the room has to be ordered to feel that way; the mood simply spreads. Our own feeds work in a similar manner, handing us the right outrage, the right joke, or the right side before we have had time to ask what we actually think.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">2. Orders, Hierarchy, and the Limits of Your Own Say</h3>
-                    <p>Swofford is trained as a sniper, yet his readiness counts for little because other people control when and whether anything happens. In one painful sequence, a sniper team that has waited for its chance is overruled when the mission is taken out of their hands. The point is not that structure and discipline are bad. Most communities, workplaces, and governments rely on them. The point is that handing over your judgment has a price, and it is worth knowing where your own responsibility begins and ends before you hand it over.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">3. Reclaiming Your Own Story Afterwards</h3>
-                    <p>The film ends with the war over and the men still carrying the weight of what it asked of them. Swofford's closing narration suggests that the rifle he trained with never really leaves his hands, even after it is turned in. Coming home does not automatically return a person's sense of direction. Getting it back takes deliberate work: naming what was done to you, what you chose, and what you want to do next.</p>
-
-    <p>For everyday life, the lesson does not have to involve war at all. Any strong institution, whether a school, a company, a political movement, or a group chat, can shape how we think without ever announcing it. A useful habit is to pause before adopting a strong opinion and ask a few simple questions. Where did this view come from? Did I reach it by weighing evidence, or by watching what the people around me approved of? What would I think if nobody were watching? Writing the answers down can make the difference between reacting and deciding.</p>
-    <p>Autonomy also does not mean rejecting every rule or distrusting every authority. It means keeping the ability to question, even when you choose to follow. Reading from more than one source, talking with people who see an issue differently, and making small decisions on purpose rather than by default all help keep that ability strong. When we do decide to commit to a group or a cause, we are better off doing so knowingly, with a clear idea of what we are agreeing to and what we are not.</p>
-    <p>It is also worth remembering that the film is one man's version of events, filtered through memory and adapted for the screen. Some veterans have questioned how closely parts of it match their own experience, and that is a reasonable reason to treat it as a personal account rather than a complete record of the war. Still, its central observation holds up well: a person can be fully trained, fully obedient, and fully present, and still be left asking whose story they were actually living. The way back is rarely dramatic. It is a patient habit of noticing, questioning, and choosing for yourself.</p>
-    `,
+                `,
                 funFact: "Walter Murch, the legendary editor of Apocalypse Now, also edited Jarhead, the very film the Marines watch and cheer at in the movie!"
             },
             {
@@ -609,56 +473,39 @@
                             </linearGradient>
                         </defs>
                         <rect width="300" height="450" fill="url(#fox-sky)"/>
-
-                        <!-- Big low sun, dead centre -->
                         <circle cx="150" cy="215" r="82" fill="#f7d98f" opacity="0.9"/>
                         <circle cx="150" cy="215" r="82" fill="none" stroke="#fbeedd" stroke-width="2" opacity="0.6"/>
-
-                        <!-- Stars -->
                         <circle cx="48" cy="40" r="1.5" fill="#fbeedd" opacity="0.8"/>
                         <circle cx="252" cy="40" r="1.5" fill="#fbeedd" opacity="0.8"/>
                         <circle cx="90" cy="76" r="1.2" fill="#fbeedd" opacity="0.7"/>
                         <circle cx="210" cy="76" r="1.2" fill="#fbeedd" opacity="0.7"/>
-
-                        <!-- Symmetrical pines -->
                         <g fill="#3a1d12">
                             <polygon points="34,330 34,250 18,290 18,262 34,226 50,262 50,290"/>
                             <polygon points="266,330 266,250 250,290 250,262 266,226 282,262 282,290"/>
                             <polygon points="72,330 72,276 62,300 62,284 72,258 82,284 82,300"/>
                             <polygon points="228,330 228,276 218,300 218,284 228,258 238,284 238,300"/>
                         </g>
-
-                        <!-- Ridge -->
                         <path d="M0 330 Q150 300 300 330 L300 450 L0 450 Z" fill="#3a1d12"/>
                         <path d="M0 330 Q150 300 300 330" stroke="#f2b24c" stroke-width="2" fill="none" opacity="0.7"/>
-
-                        <!-- Original fox, seated, front-facing -->
                         <ellipse cx="150" cy="322" rx="58" ry="6" fill="#000" opacity="0.3"/>
-                        <!-- Tail -->
                         <path d="M182 318 Q246 322 244 262 Q242 240 226 232 Q232 276 198 292 Z" fill="#d9692a"/>
                         <path d="M244 262 Q242 240 226 232 Q232 250 232 266 Q240 268 244 262 Z" fill="#fbeedd"/>
-                        <!-- Body -->
                         <path d="M116 320 Q118 252 150 246 Q182 252 184 320 Z" fill="#d9692a"/>
                         <path d="M137 320 Q139 276 150 270 Q161 276 163 320 Z" fill="#fbeedd"/>
-                        <!-- Ears -->
                         <polygon points="116,204 112,156 144,186" fill="#d9692a"/>
                         <polygon points="184,204 188,156 156,186" fill="#d9692a"/>
                         <polygon points="120,198 118,170 138,189" fill="#3a1d12"/>
                         <polygon points="180,198 182,170 162,189" fill="#3a1d12"/>
-                        <!-- Head -->
                         <path d="M114 202 Q150 172 186 202 Q182 238 150 258 Q118 238 114 202 Z" fill="#e0722c"/>
                         <path d="M118 214 Q150 228 182 214 Q174 242 150 258 Q126 242 118 214 Z" fill="#fbeedd"/>
-                        <!-- Face -->
                         <ellipse cx="136" cy="210" rx="3" ry="4" fill="#2a140c"/>
                         <ellipse cx="164" cy="210" rx="3" ry="4" fill="#2a140c"/>
                         <circle cx="150" cy="252" r="4.5" fill="#2a140c"/>
-
-                        <!-- Typography -->
-                        <rect x="30" y="344" width="240" height="88" fill="#fdf0d8" stroke="#3a1d12" stroke-width="3"/>
-                        <rect x="36" y="350" width="228" height="76" fill="none" stroke="#d9692a" stroke-width="1.5"/>
-                        <text x="150" y="372" font-family="sans-serif" font-weight="700" font-size="8" fill="#7a2e1d" text-anchor="middle" letter-spacing="2">A FILM BY WES ANDERSON</text>
-                        <text x="150" y="394" font-family="'Playfair Display', serif" font-weight="800" font-size="18" fill="#7a2e1d" text-anchor="middle" letter-spacing="2">FANTASTIC</text>
-                        <text x="150" y="414" font-family="'Playfair Display', serif" font-weight="800" font-size="18" fill="#7a2e1d" text-anchor="middle" letter-spacing="2">MR. FOX</text>
+                        <rect x="30" y="352" width="240" height="78" fill="#fdf0d8" stroke="#3a1d12" stroke-width="3"/>
+                        <rect x="36" y="358" width="228" height="66" fill="none" stroke="#d9692a" stroke-width="1.5"/>
+                        <text x="150" y="382" font-family="'Playfair Display', serif" font-weight="800" font-size="20" fill="#7a2e1d" text-anchor="middle" letter-spacing="2">FANTASTIC</text>
+                        <text x="150" y="404" font-family="'Playfair Display', serif" font-weight="800" font-size="20" fill="#7a2e1d" text-anchor="middle" letter-spacing="2">MR. FOX</text>
+                        <text x="150" y="418" font-family="sans-serif" font-weight="600" font-size="7" fill="#d9692a" text-anchor="middle" letter-spacing="2.5">A FILM BY WES ANDERSON</text>
                     </svg>
                 `,
                 fallbackGradient: "from-orange-900 to-amber-900",
@@ -666,31 +513,85 @@
                 spoiler: "Your coping mechanisms and your mental health struggles don't mean you are broken, immature, or crazy. They mean you are navigating an environment that hasn't made space for your full self. You do not need to change your core or quiet your pain to deserve to be heard.",
                 content: `
                     <p class="lead text-lg text-white font-serif">Ash Fox stands in his kitchen wearing a cape and tube socks, doing a spit-take to demand attention from a dinner table that barely looks up. As an eldest daughter, I recognized him instantly.</p>
-                    <p>In Wes Anderson’s <em>Fantastic Mr. Fox</em>, Ash is perpetually trapped in a painful family dynamic. He is small, eccentric, and living under the overwhelming shadow of a cousin who makes everything look effortless. Beneath the deadpan humor lies one of cinema’s sharpest portraits of familial invalidation, showing the defense mechanisms we build when no one truly listens to us at home.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">1. The Cape and the Mask of "Immaturity"</h3>
-                    <p>Ash’s behavior—his hostile posture, insistence on being an athlete, and sudden defiance—is routinely dismissed by his father as immaturity. Ash doesn’t wear his superhero cape because he thinks he’s bulletproof. He wears it because when your real feelings are treated as invisible, you put on armor so people are forced to see something.</p>
-                    <p>For eldest daughters, this dynamic is painfully familiar. I know what it feels like to carry the unwritten weight of responsibility while being completely misread. You are expected to set the standard, stay strong, and process everything quietly. Yet the moment your mental health falters or you express distress in a way that doesn't fit their comfort zone, it gets reframed as crazy, dramatic, or a burden. What parents view as an outburst is usually just the natural result of holding too much weight for too long without emotional support.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">2. The Noise of Not Being Heard</h3>
-                    <p>Why does Ash spit on the floor and jump off high dives into empty pools? Quiet communication failed him long ago. When you speak calmly at home and your boundaries are brushed aside, your behavior turns loud out of sheer desperation.</p>
-                    <p>There is a quiet tragedy in having family members offer scripted words of care while their actions communicate that your mental health is an inconvenience to their day. I’ve spent nights trying to explain my internal world, only to have my reactions treated like a defect rather than a distress signal. When honest dialogue falls on deaf ears, you adapt. You act defensive, withdraw, or lash out, not because you want to cause trouble, but because loud behavior is the only thing that temporarily pierces the room’s indifference.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">3. Living in the Shadow of Expectation</h3>
-                    <p>Ash struggles constantly against Kristofferson, the visiting cousin who is naturally polite, athletic, and admired by everyone. As the eldest daughter, you often live in a similar shadow: expected to caretake the dynamic, remain unshakeable, and keep everyone else comfortable, all while receiving none of the grace or understanding extended to others.</p>
-                    <p>You are held to adult standards of accountability, yet granted the emotional credibility of a child when you try to express hurt. It creates an exhausting loop: being told you are loved, but treated as though your mind is a problem everyone hopes clears up on its own.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">4. Finding Your Own "Canis Lupus"</h3>
-                    <p>The turning point in <em>Fantastic Mr. Fox</em> doesn't happen because Ash turns into Kristofferson, nor does it happen because his father suddenly understands him completely. It happens when Ash embraces his own specific skill set as a small, fast, and unyielding fox, taking his place alongside his family when they come face to face with the wild wolf on the ridge.</p>
-                    <p>Standing on that road together, watching a majestic creature that exists entirely on its own terms, Ash doesn't need to change who he is to belong. We don't need to shrink ourselves or become someone else to earn peace. Healing comes from realizing that our survival mechanisms kept us safe in a space that wasn't designed to hold us.</p>
-    `,
+                `,
                 funFact: "When Mr. Fox, Ash, Kristofferson, and Kylie encounter the wild wolf on the ridge, the wolf silently raises his paw in solidarity. It's a hopeful reminder that out in the wider world, you will eventually find your pack and be understood for who you truly are."
+            },
+            {
+                id: "film-7",
+                title: "A Little Bit of Grace: On Faith, Mistakes & Mercy",
+                filmTitle: "Your Mother Your Mother Your Mother",
+                year: 2026,
+                runtime: "7 min read",
+                category: "Personal Entries",
+                rating: 5.0,
+                watched: true,
+                liked: true,
+                rewatched: false,
+                posterImg: "",
+                svgFallback: `
+                    <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                        <defs>
+                            <linearGradient id="grace-pure-dark" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#0a0e17"/>
+                                <stop offset="50%" stop-color="#060810"/>
+                                <stop offset="100%" stop-color="#020306"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Plain dark background -->
+                        <rect width="300" height="450" fill="url(#grace-pure-dark)"/>
+
+                        <!-- TOP FILM TITLE (ENGLISH) - Well spaced with breathing room -->
+                        <text x="150" y="55" font-family="'Playfair Display', serif" font-weight="700" font-size="13.5" fill="#ffffff" text-anchor="middle" letter-spacing="3">YOUR MOTHER YOUR MOTHER</text>
+                        <text x="150" y="78" font-family="'Playfair Display', serif" font-weight="700" font-size="13.5" fill="#ffffff" text-anchor="middle" letter-spacing="3">YOUR MOTHER</text>
+
+                        <!-- STACKED ARABIC TEXT (CENTER) -->
+                        <g transform="translate(150, 155)">
+                            <text x="0" y="0" font-family="'Amiri', 'Noto Naskh Arabic', serif" font-weight="700" font-size="40" fill="#f7e3b0" text-anchor="middle">أُمُّكَ</text>
+                            <text x="0" y="52" font-family="'Amiri', 'Noto Naskh Arabic', serif" font-weight="700" font-size="40" fill="#f7e3b0" text-anchor="middle">أُمُّكَ</text>
+                            <text x="0" y="104" font-family="'Amiri', 'Noto Naskh Arabic', serif" font-weight="700" font-size="40" fill="#e8b553" text-anchor="middle">أُمُّكَ</text>
+                        </g>
+
+                        <!-- BOTTOM CREDITS - Balanced and clean -->
+                        <text x="150" y="375" font-family="'DM Sans', sans-serif" font-weight="600" font-size="7.5" fill="#5b8db8" text-anchor="middle" letter-spacing="3">A FILM BY BASSAM TARIQ</text>
+                        <text x="150" y="394" font-family="'DM Sans', sans-serif" font-weight="700" font-size="9.5" fill="#c3ccd6" text-anchor="middle" letter-spacing="3.5">MAHERSHALA ALI</text>
+                    </svg>
+                `,
+                fallbackGradient: "from-indigo-950 to-amber-900",
+                tags: ["faith", "forgiveness", "kindness", "family"],
+                spoiler: "Latif is brought back from the edge of death not by his own prayers, but by his daughter's. The film never decides whether he's a good Muslim or a bad one; its point is that faith and failure can coexist, and that what counts is taking responsibility and showing kindness, even across different beliefs.",
+                content: `
+                    <p class="lead text-lg text-white font-serif">What does it mean to be a person of faith when your actions do not always reflect what you believe? And can people who follow different paths still find ways to care for one another? <em>Your Mother, Your Mother, Your Mother</em> left me thinking about both questions long after the story ended.</p>
+                    <p>Latif is a Muslim man who prays, visits the mosque, and finds comfort in his relationship with God. Yet he also works as a hitman, living with choices that contradict the values his faith teaches. I do not think the film asks us to reduce him to a hypocrite. Instead, it gives us a complicated person: someone grieving, struggling, and trying to find his way through circumstances that do not offer easy answers.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">1. The Comfort of Believing</h3>
+                    <p>Latif's relationship with religion is personal. In moments of fear and grief, prayer gives him somewhere to turn, even when he cannot make sense of what is happening around him. Sometimes people reach for faith not because they have everything figured out, but because they do not. We pray because we are afraid, because we are hurting, or because we need to believe that there is something beyond what we can control.</p>
+                    <p>That tension is what makes Latif compelling. His faith is present, but so are his mistakes. The film allows both things to exist at once without pretending that one cancels out the other.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">2. Somewhere Between Faith and Practice</h3>
+                    <p>As someone who is Muslim on paper, I found myself somewhere between Latif and Hatty. There are parts of faith I recognise, parts I struggle with, and moments when I wonder whether my actions reflect the values I associate with my religion. I imagine many people, religious or otherwise, understand that feeling of being caught between what they believe and how consistently they manage to live by it.</p>
+                    <p>Belief and practice do not always move at the same pace. We can believe in something and still fall short of it. But that should not become a reason to stop trying. There is a difference between seeking forgiveness and using forgiveness as permission to do wrong. Faith should encourage us to recognise our mistakes, take responsibility, and make a sincere effort to do better.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">3. The Shoes Latif Has to Fill</h3>
+                    <p>Qadir's remark about the shoes Latif has to fill stayed with me. For his age, Qadir is remarkably observant. He notices more than the adults around him might assume, and his words carry an unexpected weight. Children may not always have the language to explain everything they see, but that does not mean they are unaware of what is happening around them.</p>
+                    <p>Latif is not only a man trying to reconcile his beliefs with his choices; he is also a father whose children are watching and learning from him. The shoes he has to fill can be understood as the responsibilities that come with being someone else's source of protection and guidance. His children do not need him to be flawless, but they do need him to understand the weight of the example he sets. Children may not always understand the weight of the world, but that does not mean they fail to notice who is carrying it.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">4. Different Beliefs, Shared Humanity</h3>
+                    <p>One of the film's most meaningful moments is when the Mormon community helps Latif and his family. They come from a different religious background, yet they offer support when it is needed. They do not need to share Latif's beliefs to recognise that his family is struggling.</p>
+                    <p>To me, this is an important reminder that living together harmoniously does not mean everyone has to believe the same things. It means respecting our differences without turning them into reasons for division. We can have different religions, traditions, and ways of understanding the world while still sharing the responsibility to care for one another. We do not have to agree on everything to stand beside someone. We do not have to share a faith to share kindness.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">5. When Belief Becomes a Justification</h3>
+                    <p>Pastor Hwan offers a contrast to that compassion. His religious convictions become entangled with violence and personal motives. I do not read this as the film condemning religion itself. Rather, it raises the danger of allowing personal interpretations of belief to justify actions that harm others.</p>
+                    <p>It is easy to speak about goodness, morality, and righteousness. It is harder to practise them when anger, fear, or self-interest gets in the way. Religious identity alone does not determine how someone treats other people. What matters is whether our convictions lead us towards compassion and responsibility, or become a shield for the things we do wrong.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">6. Who Prayed for You?</h3>
+                    <p>Fatiha's prayer for Latif is one of the film's most moving moments. For much of the story, we see Latif turning to God in his own moments of desperation. Here, the direction of that care is reversed: his daughter is the one praying for him. As Latif appears close to death, Fatiha's prayer becomes part of the moment that brings him back.</p>
+                    <p>The question “Who prayed for you?” gives the scene another layer. It makes us think about the people whose love and prayers carry us when we cannot carry ourselves. Latif is not only someone seeking forgiveness; he is also a father who is loved, needed, and prayed for. Fatiha sees him as her father, and her prayer reminds us of the bonds that can call someone back towards life and responsibility.</p>
+                    <p>There is also a quiet connection here to the film's wider message. Prayer may be rooted in particular beliefs, but the care behind it is something people can understand across differences. We may not pray in the same way, but we can still hope for one another, wish one another well, and ask for one another's safety.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">7. The Goodness We Leave Behind</h3>
+                    <p>Ultimately, the film left me thinking about the kind of people we choose to be. I do not have every answer about faith, and I do not think everyone does. Some of us practise more consistently than others; some are still finding their way; others are carrying questions they have not yet learned how to express. That is all the more reason to approach one another with patience.</p>
+                    <p>We should be able to live alongside people whose beliefs differ from ours without treating those differences as barriers. We should offer kindness without expecting someone to share our religion, and recognise goodness even when it comes from somewhere unfamiliar. We may not all walk the same path of faith, carry the same beliefs, or fill the same shoes. But while we are here, we can choose to make one another's journeys a little easier.</p>
+                    <p>Perhaps we will never be perfectly faithful or perfectly good. But we can keep trying. We can pray for one another, stand beside one another, take responsibility for our actions, and above all, do good. Maybe that is one of the simplest ways to honour the faith we carry, whatever shape it takes.</p>
+                    <p>Because there is a difference between seeking forgiveness and using forgiveness as permission to do wrong. And somewhere between sin and prayer, perhaps that is where the real struggle begins.</p>
+                `,
+                funFact: "Director Bassam Tariq and Mahershala Ali first teamed up on the planned Marvel film Blade, which Tariq stepped down from in 2022. This film is the project they reunited for!"
             }
         ];
 
-        /**
-         * ====================================================================
-         * HELPER FUNCTIONS & UI RENDERERS
-         * ====================================================================
-         */
-
-        // Navigation Helper
         function navigateToHash(hash) {
             window.location.hash = hash;
             router();
@@ -701,7 +602,6 @@
             router();
         }
 
-        // Render Star Ratings
         function renderStars(rating) {
             let stars = '';
             const fullStars = Math.floor(rating);
@@ -716,7 +616,6 @@
             return stars;
         }
 
-        // Letterboxd Action Badges
         function renderActionIcons(entry) {
             return `
                 <div class="flex items-center space-x-3 text-xs text-muted font-mono">
@@ -733,30 +632,22 @@
             `;
         }
 
-        // Toggle Spoiler Blur
         function toggleSpoiler(element) {
             element.classList.toggle('revealed');
         }
 
-        // Generate Cinema Ticket Newsletter HTML
         function renderCinemaTicket(formId = "newsletter-form") {
             return `
                 <div class="relative bg-panel border border-border rounded-xl p-6 shadow-2xl overflow-hidden max-w-md mx-auto">
-                    <!-- Ticket Accent Header Bar -->
                     <div class="h-1.5 w-full -mt-6 -mx-6 mb-5 bg-gradient-to-r from-brandBlue via-brandPink to-brandAmber"></div>
-                    
                     <div class="flex items-center justify-between text-xs font-mono text-muted mb-2">
                         <span class="tracking-widest uppercase text-brandAmber font-bold">ADMIT ONE</span>
                         <span>NO EXPIRATION</span>
                     </div>
-
                     <h3 class="text-xl font-bold font-serif text-white mb-1">Join the Mailing List</h3>
                     <p class="text-xs text-muted mb-4">Get the next film analysis & spoiler in your inbox.</p>
-
                     <form id="${formId}" onsubmit="handleNewsletterSubmit(event, '${formId}')" class="space-y-3">
-                        <!-- Bot Honeypot -->
                         <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
-
                         <div>
                             <input type="text" name="name" placeholder="Your name (optional)" 
                                 class="w-full bg-bg border border-border rounded-lg px-3 py-2 text-sm text-text focus:outline-none focus:border-brandBlue transition-colors placeholder:text-muted/50" />
@@ -765,17 +656,12 @@
                             <input type="email" name="email" required placeholder="Your email address (required)" 
                                 class="w-full bg-bg border border-border rounded-lg px-3 py-2 text-sm text-text focus:outline-none focus:border-brandBlue transition-colors placeholder:text-muted/50" />
                         </div>
-                        
                         <button type="submit" class="w-full bg-gradient-to-r from-brandBlue to-brandPink text-white font-semibold py-2.5 rounded-lg text-sm tracking-wide hover:opacity-90 active:scale-[0.99] transition-all flex items-center justify-center space-x-2 shadow-lg">
                             <span>Subscribe</span>
                             <svg class="text-xl" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M3 7h18v3a2 2 0 000 4v3H3v-3a2 2 0 000-4z"/></svg>
                         </button>
                     </form>
-
-                    <!-- Status Messages -->
                     <div id="${formId}-status" class="hidden mt-3 p-3 rounded-lg text-xs font-medium text-center"></div>
-
-                    <!-- Dashed Perforation Line -->
                     <div class="relative my-4 border-b border-dashed border-border/80"></div>
                     <div class="text-[10px] text-center font-mono text-muted/60 uppercase tracking-widest">
                         SPOILER ALERT PRESS &bull; ADMISSION GUARANTEED
@@ -784,7 +670,6 @@
             `;
         }
 
-        // Newsletter Submission Handler via Formspree
         async function handleNewsletterSubmit(event, formId) {
             event.preventDefault();
             const form = document.getElementById(formId);
@@ -793,7 +678,6 @@
 
             const formData = new FormData(form);
             
-            // Disable button during send
             submitBtn.disabled = true;
             submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
             
@@ -827,17 +711,9 @@
             }
         }
 
-        /**
-         * ====================================================================
-         * PAGE ROUTING & VIEW RENDERERS
-         * ====================================================================
-         */
-
-        // Render Homepage View
         function renderHome() {
             return `
                 <div class="space-y-12">
-                    <!-- Hero Header -->
                     <div class="text-center py-8 space-y-3">
                         <h1 class="text-4xl md:text-6xl font-extrabold font-serif text-white tracking-tight">
                             Movies, spoiled on purpose.
@@ -847,7 +723,6 @@
                         </p>
                     </div>
 
-                    <!-- Now Showing (Poster Grid) -->
                     <section>
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-xs font-mono uppercase tracking-widest text-brandBlue font-bold flex items-center gap-2">
@@ -856,18 +731,14 @@
                             <span class="text-xs text-muted font-mono">Click poster to read</span>
                         </div>
                         
-                        <div class="flex md:grid md:grid-cols-6 gap-4 overflow-x-auto no-scrollbar pt-4 pb-8 -mt-4 -mb-4 -mx-4 px-4 md:-mx-4 md:px-4">
+                        <div class="flex md:grid md:grid-cols-7 gap-4 overflow-x-auto no-scrollbar pt-4 pb-8 -mt-4 -mb-4 -mx-4 px-4 md:-mx-4 md:px-4">
                             ${BLOG_ENTRIES.map(entry => `
                                 <div onclick="navigateToEntry('${entry.id}')" class="group flex-shrink-0 w-44 md:w-auto cursor-pointer">
                                     <div class="aspect-[2/3] rounded-lg overflow-hidden relative bg-panel border border-border shadow-md transition-all duration-300 group-hover:scale-105 group-hover:border-brandBlue group-hover:shadow-[0_0_18px_rgba(91,141,184,0.5)]">
                                         ${entry.posterImg ? `<img src="${entry.posterImg}" alt="${entry.filmTitle}" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />` : ''}
-                                        
-                                        <!-- Inline Vector SVG Poster -->
                                         <div class="${entry.posterImg ? 'hidden' : ''} absolute inset-0 z-0">
                                             ${entry.svgFallback}
                                         </div>
-
-                                        <!-- Overlay info -->
                                         <div class="absolute inset-0 bg-gradient-to-t from-bg/95 via-bg/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-20 p-3 flex flex-col justify-end">
                                             <div class="text-xs font-serif font-bold text-white line-clamp-2">${entry.title}</div>
                                             <div class="text-[10px] text-brandAmber font-mono mt-1">${renderStars(entry.rating)}</div>
@@ -885,9 +756,7 @@
                         </div>
                     </section>
 
-                    <!-- Recent Activity & Newsletter Grid -->
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                        <!-- Recent Activity List (7 Cols) -->
                         <section class="lg:col-span-7 space-y-4">
                             <div class="flex items-center justify-between border-b border-border pb-2">
                                 <h2 class="text-xs font-mono uppercase tracking-widest text-brandPink font-bold flex items-center gap-2">
@@ -924,7 +793,6 @@
                             </div>
                         </section>
 
-                        <!-- Newsletter Ticket Callout Section (5 Cols) -->
                         <section class="lg:col-span-5 space-y-4">
                             <div class="border-b border-border pb-2">
                                 <h2 class="text-xs font-mono uppercase tracking-widest text-brandAmber font-bold flex items-center gap-2">
@@ -938,7 +806,6 @@
             `;
         }
 
-        // Render Diary Page View
         function renderDiary() {
             return `
                 <div class="max-w-4xl mx-auto space-y-6">
@@ -952,7 +819,6 @@
                         </span>
                     </div>
 
-                    <!-- Diary Table -->
                     <div class="bg-panel border border-border rounded-xl overflow-hidden">
                         <table class="w-full text-left border-collapse text-sm">
                             <thead>
@@ -987,9 +853,7 @@
             `;
         }
 
-        // Render Lists Page View
         function renderLists() {
-            // Mini poster row for a list, built from the real entries
             const listPosters = (ids) => `
                 <div class="flex flex-wrap items-start gap-4 pt-3">
                     ${ids.map(id => {
@@ -1039,18 +903,13 @@
                             <div class="text-xs font-mono text-brandBlue uppercase tracking-wider font-bold">List #04</div>
                             <h2 class="text-xl font-serif font-bold text-white">Personal Entries</h2>
                             <p class="text-xs text-muted">Entries written from my own life, beyond the original assignment.</p>
-                            ${listPosters(['film-6'])}
+                            ${listPosters(['film-6', 'film-7'])}
                         </div>
                     </div>
                 </div>
             `;
         }
 
-        /**
-         * PROFILE CONFIG
-         * photo: put your image path here (e.g. "me.jpg") to replace the placeholder.
-         * socials: replace each url "#" with your real link.
-         */
         const PROFILE = {
             name: "Sunny Khai",
             greeting: "hi, i'm",
@@ -1068,7 +927,6 @@
             ]
         };
 
-        // Render Profile Page View
         function renderProfile() {
             const totalLists = 4;
             const avg = (BLOG_ENTRIES.reduce((sum, e) => sum + e.rating, 0) / BLOG_ENTRIES.length).toFixed(1);
@@ -1093,7 +951,6 @@
 
             return `
                 <div class="max-w-4xl mx-auto space-y-8">
-                    <!-- PROFILE HEADER -->
                     <div class="flex flex-col md:flex-row items-center md:items-start gap-8 border-b border-border pb-8">
                         <div class="w-36 h-36 md:w-40 md:h-40 rounded-full overflow-hidden bg-panel border-2 ${PROFILE.photo ? 'border-border' : 'border-dashed border-border'} flex-shrink-0">
                             ${photo}
@@ -1114,20 +971,17 @@
 
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                         <div class="lg:col-span-7 space-y-6">
-                            <!-- ABOUT ME -->
                             <section class="bg-panel border border-border rounded-xl p-6 space-y-3 hover:border-brandPink/60 transition-colors">
                                 <h2 class="text-xs font-mono uppercase tracking-widest text-brandPink font-bold">About Me</h2>
                                 <p class="text-base font-serif text-white leading-relaxed">${PROFILE.aboutMe}</p>
                             </section>
 
-                            <!-- ABOUT SPOILER ALERT -->
                             <section class="bg-panel border border-border rounded-xl p-6 space-y-3 hover:border-brandAmber/60 transition-colors">
                                 <h2 class="text-xs font-mono uppercase tracking-widest text-brandAmber font-bold">About Spoiler Alert</h2>
                                 ${PROFILE.aboutSite.map(par => `<p class="text-sm text-text leading-relaxed">${par}</p>`).join('')}
                             </section>
                         </div>
 
-                        <!-- SOCIALS -->
                         <aside class="lg:col-span-5">
                             <section class="bg-panel border border-border rounded-xl p-6 space-y-4">
                                 <h2 class="text-xs font-mono uppercase tracking-widest text-brandBlue font-bold">Find Me</h2>
@@ -1139,7 +993,6 @@
             `;
         }
 
-        // Render Individual Film Entry View
         function renderFilmEntry(entryId) {
             const index = BLOG_ENTRIES.findIndex(e => e.id === entryId);
             if (index === -1) return renderHome();
@@ -1150,9 +1003,7 @@
 
             return `
                 <article class="max-w-4xl mx-auto space-y-10">
-                    <!-- ENTRY HEADER / POSTER & META -->
                     <div class="flex flex-col md:flex-row gap-8 items-start border-b border-border pb-8">
-                        <!-- Poster -->
                         <div class="w-48 md:w-56 aspect-[2/3] rounded-lg overflow-hidden bg-panel border border-border shadow-xl flex-shrink-0 relative mx-auto md:mx-0">
                             ${entry.posterImg ? `<img src="${entry.posterImg}" alt="${entry.filmTitle}" class="w-full h-full object-cover relative z-10" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');" />` : ''}
                             <div class="${entry.posterImg ? 'hidden' : ''} absolute inset-0 z-0">
@@ -1160,7 +1011,6 @@
                             </div>
                         </div>
 
-                        <!-- Header Information -->
                         <div class="space-y-4 flex-grow text-center md:text-left">
                             <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 text-xs font-mono text-muted">
                                 <span class="text-brandBlue font-semibold uppercase tracking-wider">${entry.category}</span>
@@ -1182,14 +1032,12 @@
                                 ${renderActionIcons(entry)}
                             </div>
 
-                            <!-- Tags -->
                             <div class="flex flex-wrap justify-center md:justify-start gap-2 pt-1">
                                 ${entry.tags.map(tag => `<span class="text-[11px] font-mono bg-panel border border-border px-2.5 py-1 rounded-full text-muted">#${tag}</span>`).join('')}
                             </div>
                         </div>
                     </div>
 
-                    <!-- SPOILER WARNING BANNER -->
                     <div class="bg-panel/80 border border-brandAmber/30 rounded-xl p-5 space-y-2">
                         <div class="flex items-center space-x-2 text-xs font-mono text-brandAmber uppercase font-bold tracking-wider">
                             <svg viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path fill-rule="evenodd" d="M12 2L1 21h22zM11 9h2v6h-2zm0 8h2v2h-2z"/></svg>
@@ -1200,7 +1048,6 @@
                         </div>
                     </div>
 
-                    <!-- 2.39:1 CINEMASCOPE VIDEO FRAME (IF VLOG) -->
                     ${entry.isVideo ? `
                         <div class="space-y-3">
                             <div class="flex items-center justify-between text-xs font-mono text-muted">
@@ -1213,12 +1060,10 @@
                         </div>
                     ` : ''}
 
-                    <!-- ARTICLE CONTENT BODY -->
                     <div class="prose prose-invert max-w-none text-text space-y-5 leading-relaxed font-sans text-base">
                         ${entry.content}
                     </div>
 
-                    <!-- MOVIE FUN FACT BOX -->
                     ${entry.funFact ? `
                         <div class="bg-panel border border-brandBlue/30 rounded-xl p-5 flex items-start space-x-4 my-6">
                             <div class="text-brandBlue text-2xl pt-1">
@@ -1231,7 +1076,6 @@
                         </div>
                     ` : ''}
 
-                    <!-- PREVIOUS / NEXT ENTRY NAVIGATION -->
                     <div class="flex items-center justify-between pt-8 border-t border-border text-xs font-mono">
                         <button onclick="navigateToEntry('${prevEntry.id}')" class="flex items-center space-x-2 text-muted hover:text-brandBlue transition-colors group text-left">
                             <svg class="transition-transform group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
@@ -1250,7 +1094,6 @@
                         </button>
                     </div>
 
-                    <!-- NEWSLETTER SIGNUP (ENTRY BOTTOM) -->
                     <div class="pt-8 border-t border-border">
                         ${renderCinemaTicket(`entry-bottom-newsletter-${entry.id}`)}
                     </div>
@@ -1258,14 +1101,10 @@
             `;
         }
 
-        /**
-         * ROUTER CONTROLLER
-         */
         function router() {
             const app = document.getElementById('app-content');
             const hash = window.location.hash || '#home';
 
-            // Scroll to top on navigation
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             if (hash === '#home' || hash === '') {
@@ -1284,7 +1123,6 @@
             }
         }
 
-        // Initialize App
         window.addEventListener('hashchange', router);
         window.addEventListener('load', () => {
             document.getElementById('current-year').textContent = new Date().getFullYear();
