@@ -96,7 +96,7 @@
     <header class="sticky top-0 z-50 bg-bg/90 backdrop-blur-md border-b border-border transition-colors duration-200">
         <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
             <!-- Header Logo (SVG) -->
-            <a href="#home" class="group flex flex-col items-center justify-center transition-transform hover:scale-105" aria-label="Spoiler Alert Home">
+            <a href="#home" onclick="event.preventDefault(); navigateToHash('#home');" class="group flex flex-col items-center justify-center transition-transform hover:scale-105" aria-label="Spoiler Alert Home">
                 <svg width="68" height="24" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg" class="drop-shadow">
                     <circle cx="28" cy="20" r="16" fill="#5b8db8" fill-opacity="0.75" style="mix-blend-mode: screen;" />
                     <circle cx="50" cy="20" r="16" fill="#e0769f" fill-opacity="0.75" style="mix-blend-mode: screen;" />
@@ -110,6 +110,7 @@
                 <button onclick="navigateToHash('#home')" class="nav-link text-white hover:text-brandBlue transition-colors py-1 border-b-2 border-transparent">Films</button>
                 <button onclick="navigateToHash('#diary')" class="nav-link text-muted hover:text-brandPink transition-colors py-1 border-b-2 border-transparent">Diary</button>
                 <button onclick="navigateToHash('#lists')" class="nav-link text-muted hover:text-brandAmber transition-colors py-1 border-b-2 border-transparent">Lists</button>
+                <button onclick="navigateToHash('#profile')" class="nav-link text-muted hover:text-white transition-colors py-1 border-b-2 border-transparent">Profile</button>
             </nav>
         </div>
     </header>
@@ -124,7 +125,7 @@
         <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-8">
             <!-- Footer Branding -->
             <div class="flex flex-col items-center md:items-start text-center md:text-left">
-                <a href="#home" class="flex flex-col items-center md:items-start group mb-3">
+                <a href="#home" onclick="event.preventDefault(); navigateToHash('#home');" class="flex flex-col items-center md:items-start group mb-3">
                     <svg width="50" height="18" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="28" cy="20" r="16" fill="#5b8db8" fill-opacity="0.75" style="mix-blend-mode: screen;" />
                         <circle cx="50" cy="20" r="16" fill="#e0769f" fill-opacity="0.75" style="mix-blend-mode: screen;" />
@@ -584,6 +585,100 @@
     <p>It is also worth remembering that the film is one man's version of events, filtered through memory and adapted for the screen. Some veterans have questioned how closely parts of it match their own experience, and that is a reasonable reason to treat it as a personal account rather than a complete record of the war. Still, its central observation holds up well: a person can be fully trained, fully obedient, and fully present, and still be left asking whose story they were actually living. The way back is rarely dramatic. It is a patient habit of noticing, questioning, and choosing for yourself.</p>
     `,
                 funFact: "Walter Murch, the legendary editor of Apocalypse Now, also edited Jarhead, the very film the Marines watch and cheer at in the movie!"
+            },
+            {
+                id: "film-6",
+                title: "Different, Different-er: On Being the Eldest Daughter",
+                filmTitle: "Fantastic Mr. Fox",
+                year: 2009,
+                runtime: "4 min read",
+                category: "Personal",
+                rating: 5.0,
+                watched: true,
+                liked: true,
+                rewatched: true,
+                posterImg: "",
+                svgFallback: `
+                    <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                        <defs>
+                            <linearGradient id="fox-poster-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#4a1808"/>
+                                <stop offset="45%" stop-color="#b84c16"/>
+                                <stop offset="85%" stop-color="#e88923"/>
+                                <stop offset="100%" stop-color="#f5ca68"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- Warm Wes Anderson Autumn Palette -->
+                        <rect width="300" height="450" fill="url(#fox-poster-bg)"/>
+
+                        <!-- Symmetrical Sun / Spotlight Ring -->
+                        <circle cx="150" cy="180" r="95" fill="#fce5a3" opacity="0.3"/>
+                        <circle cx="150" cy="180" r="75" fill="#fce5a3" opacity="0.4"/>
+                        <circle cx="150" cy="180" r="55" fill="#fff3cd" opacity="0.5"/>
+
+                        <!-- Distant Symmetrical Pine Trees -->
+                        <g fill="#2b0e05" opacity="0.9">
+                            <polygon points="35,270 35,210 20,240 20,220 35,190 50,220 50,240"/>
+                            <polygon points="265,270 265,210 250,240 250,220 265,190 280,220 280,240"/>
+                            <polygon points="70,270 70,225 60,245 60,232 70,210 80,232 80,245"/>
+                            <polygon points="230,270 230,225 220,245 220,232 230,210 240,232 240,245"/>
+                        </g>
+
+                        <!-- Symmetrical Ridge -->
+                        <path d="M0 270 Q150 245 300 270 L300 450 L0 450 Z" fill="#2b0e05"/>
+                        <path d="M0 270 Q150 245 300 270" stroke="#f5ca68" stroke-width="2" fill="none" opacity="0.8"/>
+
+                        <!-- Central Silhouette: The Wild Wolf raising his paw on the ridge -->
+                        <g fill="#fff3cd">
+                            <!-- Wolf Body -->
+                            <path d="M132 265 Q135 225 150 215 Q165 225 168 265 Z"/>
+                            <!-- Wolf Head -->
+                            <circle cx="150" cy="205" r="10"/>
+                            <!-- Wolf Ears -->
+                            <polygon points="143,200 141,186 148,197"/>
+                            <polygon points="157,200 159,186 152,197"/>
+                            <!-- Raised Paw in Solidarity -->
+                            <path d="M158 215 L178 190 L184 194 L164 220 Z"/>
+                            <circle cx="182" cy="191" r="3.5"/>
+                        </g>
+
+                        <!-- Symmetrical Inner Border Frame -->
+                        <rect x="18" y="18" width="264" height="414" fill="none" stroke="#fff3cd" stroke-width="2" opacity="0.85"/>
+                        <rect x="22" y="22" width="256" height="406" fill="none" stroke="#2b0e05" stroke-width="1.5" opacity="0.6"/>
+
+                        <!-- Movie Title and Director Typography Card -->
+                        <rect x="34" y="325" width="232" height="84" fill="#2b0e05" stroke="#f5ca68" stroke-width="2.5" rx="2"/>
+                        <rect x="38" y="329" width="224" height="76" fill="none" stroke="#b84c16" stroke-width="1.5"/>
+
+                        <text x="150" y="352" font-family="'Playfair Display', serif" font-weight="800" font-size="17" fill="#fff3cd" text-anchor="middle" letter-spacing="3">FANTASTIC</text>
+                        <text x="150" y="374" font-family="'Playfair Display', serif" font-weight="800" font-size="17" fill="#fff3cd" text-anchor="middle" letter-spacing="3">MR. FOX</text>
+
+                        <line x1="60" y1="383" x2="240" y2="383" stroke="#f5ca68" stroke-width="1" opacity="0.7"/>
+
+                        <text x="150" y="396" font-family="sans-serif" font-weight="700" font-size="8.5" fill="#f5ca68" text-anchor="middle" letter-spacing="3">A FILM BY WES ANDERSON</text>
+                    </svg>
+                `,
+                fallbackGradient: "from-orange-900 to-amber-900",
+                tags: ["family", "mental-health", "eldest-daughter", "belonging"],
+                spoiler: "Your coping mechanisms and your mental health struggles don't mean you are broken, immature, or crazy. They mean you are navigating an environment that hasn't made space for your full self. You do not need to change your core or quiet your pain to deserve to be heard.",
+                content: `
+                    <p class="lead text-lg text-white font-serif">Ash Fox stands in his kitchen wearing a cape and tube socks, doing a spit-take to demand attention from a dinner table that barely looks up. As an eldest daughter, I recognized him instantly.</p>
+                    <p>In Wes Anderson’s <em>Fantastic Mr. Fox</em>, Ash is perpetually trapped in a painful family dynamic. He is small, eccentric, and living under the overwhelming shadow of a cousin who makes everything look effortless. Beneath the deadpan humor lies one of cinema’s sharpest portraits of familial invalidation, showing the defense mechanisms we build when no one truly listens to us at home.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">1. The Cape and the Mask of "Immaturity"</h3>
+                    <p>Ash’s behavior—his hostile posture, insistence on being an athlete, and sudden defiance—is routinely dismissed by his father as immaturity. Ash doesn’t wear his superhero cape because he thinks he’s bulletproof. He wears it because when your real feelings are treated as invisible, you put on armor so people are forced to see something.</p>
+                    <p>For eldest daughters, this dynamic is painfully familiar. I know what it feels like to carry the unwritten weight of responsibility while being completely misread. You are expected to set the standard, stay strong, and process everything quietly. Yet the moment your mental health falters or you express distress in a way that doesn't fit their comfort zone, it gets reframed as crazy, dramatic, or a burden. What parents view as an outburst is usually just the natural result of holding too much weight for too long without emotional support.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">2. The Noise of Not Being Heard</h3>
+                    <p>Why does Ash spit on the floor and jump off high dives into empty pools? Quiet communication failed him long ago. When you speak calmly at home and your boundaries are brushed aside, your behavior turns loud out of sheer desperation.</p>
+                    <p>There is a quiet tragedy in having family members offer scripted words of care while their actions communicate that your mental health is an inconvenience to their day. I’ve spent nights trying to explain my internal world, only to have my reactions treated like a defect rather than a distress signal. When honest dialogue falls on deaf ears, you adapt. You act defensive, withdraw, or lash out, not because you want to cause trouble, but because loud behavior is the only thing that temporarily pierces the room’s indifference.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">3. Living in the Shadow of Expectation</h3>
+                    <p>Ash struggles constantly against Kristofferson, the visiting cousin who is naturally polite, athletic, and admired by everyone. As the eldest daughter, you often live in a similar shadow: expected to caretake the dynamic, remain unshakeable, and keep everyone else comfortable, all while receiving none of the grace or understanding extended to others.</p>
+                    <p>You are held to adult standards of accountability, yet granted the emotional credibility of a child when you try to express hurt. It creates an exhausting loop: being told you are loved, but treated as though your mind is a problem everyone hopes clears up on its own.</p>
+                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">4. Finding Your Own "Canis Lupus"</h3>
+                    <p>The turning point in <em>Fantastic Mr. Fox</em> doesn't happen because Ash turns into Kristofferson, nor does it happen because his father suddenly understands him completely. It happens when Ash embraces his own specific skill set as a small, fast, and unyielding fox, taking his place alongside his family when they come face to face with the wild wolf on the ridge.</p>
+                    <p>Standing on that road together, watching a majestic creature that exists entirely on its own terms, Ash doesn't need to change who he is to belong. We don't need to shrink ourselves or become someone else to earn peace. Healing comes from realizing that our survival mechanisms kept us safe in a space that wasn't designed to hold us.</p>
+    `,
+                funFact: "When Mr. Fox, Ash, Kristofferson, and Kylie encounter the wild wolf on the ridge, the wolf silently raises his paw in solidarity. It's a hopeful reminder that out in the wider world, you will eventually find your pack and be understood for who you truly are."
             }
         ];
 
@@ -759,7 +854,7 @@
                             <span class="text-xs text-muted font-mono">Click poster to read</span>
                         </div>
                         
-                        <div class="flex md:grid md:grid-cols-5 gap-4 overflow-x-auto no-scrollbar pt-4 pb-8 -mt-4 -mb-4 -mx-4 px-4 md:-mx-4 md:px-4">
+                        <div class="flex md:grid md:grid-cols-6 gap-4 overflow-x-auto no-scrollbar pt-4 pb-8 -mt-4 -mb-4 -mx-4 px-4 md:-mx-4 md:px-4">
                             ${BLOG_ENTRIES.map(entry => `
                                 <div onclick="navigateToEntry('${entry.id}')" class="group flex-shrink-0 w-44 md:w-auto cursor-pointer">
                                     <div class="aspect-[2/3] rounded-lg overflow-hidden relative bg-panel border border-border shadow-md transition-all duration-300 group-hover:scale-105 group-hover:border-brandBlue group-hover:shadow-[0_0_18px_rgba(91,141,184,0.5)]">
@@ -913,7 +1008,7 @@
                 <div class="max-w-4xl mx-auto space-y-8">
                     <div class="border-b border-border pb-4">
                         <h1 class="text-3xl font-serif font-bold text-white">Curated Lists</h1>
-                        <p class="text-xs text-muted font-mono mt-1">Categorized film collections for personal development.</p>
+                        <p class="text-xs text-muted font-mono mt-1">Categorized film collections, from life lessons to personal stories.</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -937,6 +1032,106 @@
                             <p class="text-xs text-muted">Original filmmaking experiments, where style, framing, and sound do the storytelling.</p>
                             ${listPosters(['film-3'])}
                         </div>
+
+                        <div class="bg-panel border border-border rounded-xl p-6 space-y-3 hover:border-brandBlue transition-colors">
+                            <div class="text-xs font-mono text-brandBlue uppercase tracking-wider font-bold">List #04</div>
+                            <h2 class="text-xl font-serif font-bold text-white">Personal</h2>
+                            <p class="text-xs text-muted">Entries written from my own life, beyond the original assignment.</p>
+                            ${listPosters(['film-6'])}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * PROFILE CONFIG
+         * photo: put your image path here (e.g. "me.jpg") to replace the placeholder.
+         * socials: replace each url "#" with your real link.
+         */
+        const PROFILE = {
+            name: "Sunny Khai",
+            greeting: "hi, i'm",
+            photo: "https://github.com/anakinskyloser/spoiler-alert/blob/main/WhatsApp%20Image%202026-11-07%20at%2011.05.19%20PM.jpeg?raw=true",
+            aboutMe: "i just like to watch movies and live vicariously through them.",
+            aboutSite: [
+                "spoiler alert started as a project for my internet technology in communication (multimedia & broadcasting) assignment. inspired by letterboxd, i built this website to practise putting a website together from scratch: the layout, the writing, the design, and making it feel like a place people might actually want to visit.",
+                "somewhere along the way i ended up liking what i had built so much that i decided not to stop at the assignment. it grew into a space for deconstructing the films i love, pulling out the life lessons, habits and ideas hiding inside them, and for sharing some more personal essays too."
+            ],
+            socials: [
+                { name: "Portfolio", handle: "your portfolio", url: "#", color: "text-white", icon: '<path d="M3 8h18v12H3zM9 8V5h6v3M3 13h18"/>' },
+                { name: "Spotify", handle: "@31ncmwsorzlh3dtrjz2jrmj2spja", url: "https://open.spotify.com/user/31ncmwsorzlh3dtrjz2jrmj2spja?si=jrHtKO8rTxafgofZGyvrKA&utm_source=copy-link", color: "text-brandBlue", icon: '<path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zM21 16a3 3 0 11-6 0 3 3 0 016 0z"/>' },
+                { name: "Discord", handle: "@1374755818972512386", url: "https://discord.com", color: "text-brandPink", icon: '<path d="M21 12a8 8 0 01-11.6 7.1L3 21l1.9-5.4A8 8 0 1121 12z"/>' },
+                { name: "Instagram", handle: "@pherom0n3s", url: "https://www.instagram.com/pherom0n3s?psln=MWQ0OTFpOGZwaDh0MA%3D%3D&utm_source=qr", color: "text-brandAmber", icon: '<path d="M4 8h3l2-3h6l2 3h3v11H4zM12 17a4 4 0 100-8 4 4 0 000 8z"/>' }
+            ]
+        };
+
+        // Render Profile Page View
+        function renderProfile() {
+            const totalLists = 4;
+            const avg = (BLOG_ENTRIES.reduce((sum, e) => sum + e.rating, 0) / BLOG_ENTRIES.length).toFixed(1);
+
+            const photo = PROFILE.photo
+                ? `<img src="${PROFILE.photo}" alt="${PROFILE.name}" class="w-full h-full object-cover" />`
+                : `<div class="w-full h-full flex flex-col items-center justify-center text-muted/60 gap-1">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:2.6rem;height:2.6rem" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+                        <span class="text-[10px] font-mono uppercase tracking-widest">Your photo</span>
+                   </div>`;
+
+            const socials = PROFILE.socials.map(so => `
+                <a href="${so.url}" ${so.url === '#' ? `onclick="event.preventDefault()"` : `target="_blank" rel="noopener noreferrer"`}
+                   class="group flex items-center gap-3 bg-bg border border-border hover:border-brandBlue rounded-lg px-4 py-3 transition-colors">
+                    <svg class="${so.color}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:1.4rem;height:1.4rem" aria-hidden="true">${so.icon}</svg>
+                    <div class="min-w-0">
+                        <div class="text-sm font-semibold text-white group-hover:text-brandBlue transition-colors">${so.name}</div>
+                        <div class="text-[11px] font-mono text-muted truncate">${so.handle}</div>
+                    </div>
+                </a>
+            `).join('');
+
+            return `
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <!-- PROFILE HEADER -->
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-8 border-b border-border pb-8">
+                        <div class="w-36 h-36 md:w-40 md:h-40 rounded-full overflow-hidden bg-panel border-2 border-dashed border-border flex-shrink-0">
+                            ${photo}
+                        </div>
+                        <div class="flex-grow text-center md:text-left space-y-3">
+                            <h1 class="text-3xl md:text-5xl font-extrabold font-serif text-white tracking-tight leading-tight">
+                                ${PROFILE.greeting} <span class="text-brandBlue">${PROFILE.name.toLowerCase()}</span>
+                            </h1>
+                            <div class="flex items-center justify-center md:justify-start gap-6 pt-3 text-center">
+                                <div><div class="text-xl font-bold text-white font-serif">${BLOG_ENTRIES.length}</div><div class="text-[10px] font-mono uppercase tracking-widest text-muted">Entries</div></div>
+                                <div class="w-px h-8 bg-border"></div>
+                                <div><div class="text-xl font-bold text-white font-serif">${totalLists}</div><div class="text-[10px] font-mono uppercase tracking-widest text-muted">Lists</div></div>
+                                <div class="w-px h-8 bg-border"></div>
+                                <div><div class="text-xl font-bold text-white font-serif">${avg}</div><div class="text-[10px] font-mono uppercase tracking-widest text-muted">Avg rating</div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                        <div class="lg:col-span-7 space-y-6">
+                            <!-- ABOUT ME -->
+                            <section class="bg-panel border border-border rounded-xl p-6 space-y-3 hover:border-brandPink/60 transition-colors">
+                                <h2 class="text-xs font-mono uppercase tracking-widest text-brandPink font-bold">About Me</h2>
+                                <p class="text-base font-serif text-white leading-relaxed">${PROFILE.aboutMe}</p>
+                            </section>
+
+                            <!-- ABOUT SPOILER ALERT -->
+                            <section class="bg-panel border border-border rounded-xl p-6 space-y-3 hover:border-brandAmber/60 transition-colors">
+                                <h2 class="text-xs font-mono uppercase tracking-widest text-brandAmber font-bold">About Spoiler Alert</h2>
+                                ${PROFILE.aboutSite.map(par => `<p class="text-sm text-text leading-relaxed">${par}</p>`).join('')}
+                            </section>
+                        </div>
+
+                        <!-- SOCIALS -->
+                        <aside class="lg:col-span-5">
+                            <section class="bg-panel border border-border rounded-xl p-6 space-y-4">
+                                <h2 class="text-xs font-mono uppercase tracking-widest text-brandBlue font-bold">Find Me</h2>
+                                <div class="space-y-3">${socials}</div>
+                            </section>
+                        </aside>
                     </div>
                 </div>
             `;
@@ -1077,6 +1272,8 @@
                 app.innerHTML = renderDiary();
             } else if (hash === '#lists') {
                 app.innerHTML = renderLists();
+            } else if (hash === '#profile') {
+                app.innerHTML = renderProfile();
             } else if (hash.startsWith('#film-')) {
                 const entryId = hash.replace('#', '');
                 app.innerHTML = renderFilmEntry(entryId);
