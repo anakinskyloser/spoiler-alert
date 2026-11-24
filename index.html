@@ -247,10 +247,10 @@
             },
             {
                 id: "film-3",
-                title: "A Regular Bruneian Student's Life at KIGS Brunei (A Wes Anderson Style Experiment)",
-                filmTitle: "Life at KIGS Brunei",
+                title: "Ma: Finding the Quiet Inside a Loud Process",
+                filmTitle: "The Space Between",
                 year: 2026,
-                runtime: "4 min read",
+                runtime: "2 min read",
                 category: "Visual Essay / Vlog",
                 rating: 5.0,
                 watched: true,
@@ -259,56 +259,62 @@
                 posterImg: "",
                 svgFallback: `
                     <svg class="w-full h-full" viewBox="0 0 300 450" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                        <rect width="300" height="450" fill="#f7c6d0"/>
-                        <rect y="270" width="300" height="180" fill="#bfe3d0"/>
-                        <rect y="268" width="300" height="4" fill="#e9b44c"/>
-                        <rect x="50" y="110" width="200" height="158" fill="#fbe9a6" stroke="#8a5a44" stroke-width="3"/>
-                        <rect x="50" y="100" width="200" height="14" fill="#e9b44c" stroke="#8a5a44" stroke-width="3"/>
-                        <polygon points="150,62 112,100 188,100" fill="#f4a9b8" stroke="#8a5a44" stroke-width="3"/>
-                        <circle cx="150" cy="86" r="7" fill="#fbe9a6" stroke="#8a5a44" stroke-width="2"/>
-                        <path d="M64 268 V196 A16 16 0 0 1 96 196 V268 Z" fill="#7fb7a4" stroke="#8a5a44" stroke-width="3"/>
-                        <path d="M134 268 V176 A16 16 0 0 1 166 176 V268 Z" fill="#5f9d89" stroke="#8a5a44" stroke-width="3"/>
-                        <path d="M204 268 V196 A16 16 0 0 1 236 196 V268 Z" fill="#7fb7a4" stroke="#8a5a44" stroke-width="3"/>
-                        <rect x="62" y="136" width="36" height="22" fill="#f7c6d0" stroke="#8a5a44" stroke-width="2"/>
-                        <rect x="202" y="136" width="36" height="22" fill="#f7c6d0" stroke="#8a5a44" stroke-width="2"/>
-                        <rect x="132" y="136" width="36" height="22" fill="#f7c6d0" stroke="#8a5a44" stroke-width="2"/>
-                        <polygon points="136,270 164,270 190,330 110,330" fill="#f7e3c4" stroke="#8a5a44" stroke-width="2"/>
-                        <rect x="110" y="330" width="80" height="4" fill="#e9b44c"/>
-                        <circle cx="150" cy="222" r="9" fill="#8a5a44"/>
-                        <rect x="141" y="232" width="18" height="30" rx="4" fill="#d96b7c"/>
-                        <rect x="143" y="262" width="5" height="12" fill="#3f3b5a"/>
-                        <rect x="152" y="262" width="5" height="12" fill="#3f3b5a"/>
-                        <path d="M141 236 L132 256" stroke="#e9b44c" stroke-width="3" stroke-linecap="round" fill="none"/>
-                        <path d="M159 236 L168 256" stroke="#e9b44c" stroke-width="3" stroke-linecap="round" fill="none"/>
-                        <rect x="127" y="254" width="12" height="14" rx="2" fill="#fbe9a6" stroke="#8a5a44" stroke-width="2"/>
-                        <rect x="161" y="254" width="12" height="14" rx="2" fill="#fbe9a6" stroke="#8a5a44" stroke-width="2"/>
-                        <rect x="36" y="250" width="12" height="18" fill="#d96b7c"/>
-                        <circle cx="42" cy="244" r="9" fill="#5f9d89"/>
-                        <rect x="252" y="250" width="12" height="18" fill="#d96b7c"/>
-                        <circle cx="258" cy="244" r="9" fill="#5f9d89"/>
-                        <rect x="40" y="352" width="220" height="64" fill="#fdf6e3" stroke="#8a5a44" stroke-width="3"/>
-                        <rect x="46" y="358" width="208" height="52" fill="none" stroke="#e9b44c" stroke-width="1.5"/>
-                        <text x="150" y="384" font-family="'Playfair Display', serif" font-weight="800" font-size="22" fill="#8a5a44" text-anchor="middle" letter-spacing="3">LIFE AT KIGS</text>
-                        <text x="150" y="400" font-family="sans-serif" font-weight="600" font-size="7" fill="#d96b7c" text-anchor="middle" letter-spacing="1.4">A WES ANDERSON STYLE EXPERIMENT</text>
-                        <text x="150" y="436" font-family="sans-serif" font-weight="600" font-size="9" fill="#5b7c6f" text-anchor="middle" letter-spacing="4">BRUNEI DARUSSALAM</text>
+                        <defs>
+                            <linearGradient id="ma-bg" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#0a0a0b"/>
+                                <stop offset="0.6" stop-color="#17171a"/>
+                                <stop offset="1" stop-color="#0d0d0e"/>
+                            </linearGradient>
+                            <radialGradient id="ma-glow" cx="0.5" cy="0.5" r="0.5">
+                                <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+                                <stop offset="0.45" stop-color="#ffffff" stop-opacity="0.14"/>
+                                <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+                            </radialGradient>
+                            <linearGradient id="ma-beam" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/>
+                                <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="300" height="450" fill="url(#ma-bg)"/>
+                        <circle cx="150" cy="196" r="120" fill="url(#ma-glow)"/>
+                        <polygon points="118,236 182,236 250,430 50,430" fill="url(#ma-beam)"/>
+                        <rect y="338" width="300" height="112" fill="#0b0b0c" opacity="0.55"/>
+                        <line x1="0" y1="338" x2="300" y2="338" stroke="#ffffff" stroke-opacity="0.18"/>
+                        <ellipse cx="150" cy="384" rx="74" ry="15" fill="#ffffff" opacity="0.2"/>
+                        <circle cx="150" cy="196" r="38" fill="#f4f4f2"/>
+                        <rect x="62" y="78" width="176" height="12" fill="#d8d8d6"/>
+                        <rect x="72" y="96" width="156" height="5" fill="#d8d8d6" opacity="0.7"/>
+                        <rect x="72" y="96" width="20" height="242" fill="#d8d8d6"/>
+                        <rect x="208" y="96" width="20" height="242" fill="#d8d8d6"/>
+                        <ellipse cx="150" cy="386" rx="40" ry="3.5" fill="#000000" opacity="0.55"/>
+                        <circle cx="150" cy="352" r="6" fill="#050505"/>
+                        <path d="M142 362 Q150 358 158 362 L160 384 L140 384 Z" fill="#050505"/>
+                        <rect x="137" y="364" width="5" height="14" rx="2" fill="#050505"/>
+                        <rect x="14" y="14" width="272" height="422" fill="none" stroke="#ffffff" stroke-opacity="0.14"/>
+                        <g fill="#ffffff" opacity="0.35">
+                            <circle cx="40" cy="48" r="0.9"/>
+                            <circle cx="262" cy="62" r="0.7"/>
+                            <circle cx="30" cy="150" r="0.7"/>
+                            <circle cx="272" cy="214" r="0.9"/>
+                            <circle cx="44" cy="296" r="0.7"/>
+                            <circle cx="256" cy="320" r="0.7"/>
+                        </g>
                     </svg>
                 `,
-                fallbackGradient: "from-pink-900 to-emerald-900",
-                tags: ["filmmaking", "vlog", "brunei", "symmetry"],
-                spoiler: "There's no plot, and that's on purpose. Symmetry turns an ordinary day at college into a performance, and the final twist is that the real star was never the student, but the space itself.",
+                fallbackGradient: "from-neutral-950 to-neutral-800",
+                tags: ["visual-essay", "ma", "black-and-white", "brunei"],
+                videoSlot: true,
+                videoId: "A2MBjTj1PLo",
+                spoiler: "Nothing in the film was planned. The best moments were never in the schedule. They were the gaps between tasks that I almost skipped past. The chaos was the job, but the stillness was what I ended up remembering.",
                 content: `
-                    <p class="lead text-lg text-white font-serif">Director's Notes: Translating symmetrical cinema to campus life.</p>
-                    <p>Instead of standard handheld vlog cuts, this 90-second visual essay captures a regular Bruneian student's life at KIGS Brunei by turning daily routines at Kolej IGS into an exercise in rigid symmetry, flat grid layouts, and snappy camera work. The goal was simple: take the mundane rhythm of college life (arriving at campus, taking notes, reading in the library) and frame it through the whimsical, meticulously structured lens of Wes Anderson.</p>
-                    <p>Filmed entirely on an iPhone 13 using Cinematic Mode at 24fps, the project relies on dead-center framing, pastel color-matching around Kiulap, and sharp 90-degree whip-pans to replace traditional narrative pacing.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">1. Dead-Center Framing & Planar Composition</h3>
-                    <p>In classical vlogging, movement creates energy. In Wes Anderson's visual universe, stillness within symmetry creates humor and elegance. Every shot at KIGS was staged with strict grid alignments: the subject sitting exactly in the center of the lecture desk, symmetrical bookshelves bracketing the library shot, and door frames matching the geometric grid of campus architecture.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">2. Color Palettes of Kiulap & Campus Spaces</h3>
-                    <p>To match Anderson’s iconic pastel aesthetic (think <em>The Grand Budapest Hotel</em> or <em>Moonrise Kingdom</em>), we color-graded the footage to emphasize warm, muted pastels—soft mint greens, pale mustard yellows, and warm coral pinks. This turns ordinary college hallways into stylized theatrical sets.</p>
-                    <h3 class="text-xl font-bold font-serif text-white mt-6 mb-2">3. The Rhythmic Whip-Pan</h3>
-                    <p>Transitions were executed in-camera using rapid 90-degree whip-pans. Rather than cutting between scenes, the camera snaps sideways from a cup of teh tarik to a textbook page, creating a humorous, mechanical rhythm that mirrors the structured nature of student deadlines.</p>
-                    <p>Ultimately, framing student life this way transforms routine into art. It forces you to look at everyday surroundings—the desk, the hallway, the morning walk—with fresh appreciation for detail and structure.</p>
+                    <p class="lead text-lg text-white font-serif">Running a faculty event is loud.</p>
+                    <p>There are neon posters, group chats that never go quiet, deadlines stacked on top of deadlines, and a steady stream of people asking what the vision is. I was the creative director, which meant I was supposed to have an answer. Most days I didn't. I just kept moving, because that's what the noise seems to ask of you.</p>
+                    <p>But somewhere in the middle of it, I started noticing smaller things; nobody had put the things that I filmed in the schedule, and nobody would ever ask me to make them. They were just there, quietly, underneath everything I was so busy trying to make louder.</p>
+                    <p>The more colorful the process became, the more I wanted to know what was left when you took the color away. Without it, you stop looking at what's loud and start looking at what's actually there: the shape of a shadow, the pause in a conversation, the space between one task and the next. That's what the Japanese call <em>ma</em>, the interval that gives everything around it meaning. I'd walked through those intervals every day without seeing them.</p>
+                    <p>This is a story about being an ordinary student in Brunei, tired and excited and a little in over my head, trying to build something for other people to enjoy. It isn't about the event itself, and it isn't really about creativity either. It's about what happens when you slow down long enough to notice your own life while you're still in the middle of living it, and how much of it you were about to miss.</p>
+                    <p class="text-white font-serif italic">Watch it once for the noise, and once for everything the noise was hiding.</p>
                 `,
-                funFact: "Wes Anderson's famous dead-center framing is not just an artistic quirk; he has used vintage anamorphic lenses, like the Panavision C-Series, whose slight distortion at the edges naturally pulls your eyes straight to the middle of the frame!"
+                funFact: "The Japanese word <em>ma</em> (間) is written as a gate with the sun shining through it. It's the space between things, where light gets in. Taking the color out of a loud, bright process is a way of making that space visible."
             },
             {
                 id: "film-4",
@@ -1092,6 +1098,48 @@
             `;
         }
 
+        function renderVideoFrame(entry) {
+            const hasVideo = !!entry.videoId;
+            const corner = (pos) => `<span class="pointer-events-none absolute z-20 w-4 h-4 border-white/50 ${pos}"></span>`;
+
+            const screen = hasVideo
+                ? `<iframe src="https://www.youtube-nocookie.com/embed/${entry.videoId}?rel=0&modestbranding=1" title="${entry.filmTitle}" class="absolute top-0 left-0 w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`
+                : `<div class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-gradient-to-b from-neutral-950 to-neutral-900 text-center">
+                        <svg width="68" height="24" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <circle cx="28" cy="20" r="16" fill="#e5e5e5" fill-opacity="0.35" style="mix-blend-mode: screen;" />
+                            <circle cx="50" cy="20" r="16" fill="#e5e5e5" fill-opacity="0.35" style="mix-blend-mode: screen;" />
+                            <circle cx="72" cy="20" r="16" fill="#e5e5e5" fill-opacity="0.35" style="mix-blend-mode: screen;" />
+                        </svg>
+                        <div class="text-[10px] font-mono uppercase tracking-[0.35em] text-muted">Film arriving soon</div>
+                   </div>`;
+
+            return `
+                <figure class="space-y-3">
+                    <div class="flex items-center justify-between text-xs font-mono text-muted">
+                        <span class="text-brandPink font-bold uppercase tracking-widest flex items-center gap-2">
+                            <svg viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M3 6h12a2 2 0 012 2v8a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2zm15 4l5-3v10l-5-3z"/></svg>
+                            Watch the Film
+                        </span>
+                        <span class="uppercase tracking-widest">Monochrome</span>
+                    </div>
+                    <div class="relative bg-panel border border-border rounded-xl p-2 md:p-3 shadow-2xl overflow-hidden">
+                        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brandBlue via-brandPink to-brandAmber"></div>
+                        <div class="relative mt-1 rounded-lg overflow-hidden bg-black border border-border/70" style="padding-top: 56.25%;">
+                            ${screen}
+                            ${corner('top-3 left-3 border-t-2 border-l-2')}
+                            ${corner('top-3 right-3 border-t-2 border-r-2')}
+                            ${corner('bottom-3 left-3 border-b-2 border-l-2')}
+                            ${corner('bottom-3 right-3 border-b-2 border-r-2')}
+                        </div>
+                        <div class="flex items-center justify-between px-1 pt-3 text-[10px] font-mono uppercase tracking-widest text-muted/70">
+                            <span>Spoiler Alert Press</span>
+                            <span>ma &middot; the space between</span>
+                        </div>
+                    </div>
+                </figure>
+            `;
+        }
+
         function renderFilmEntry(entryId) {
             const index = BLOG_ENTRIES.findIndex(e => e.id === entryId);
             if (index === -1) return renderHome();
@@ -1147,17 +1195,7 @@
                         </div>
                     </div>
 
-                    ${entry.isVideo ? `
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between text-xs font-mono text-muted">
-                                <span class="text-brandPink font-bold uppercase"><svg class="mr-1" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;width:1.3em;height:1.3em;vertical-align:-0.28em" aria-hidden="true"><path d="M3 6h12a2 2 0 012 2v8a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2zm15 4l5-3v10l-5-3z"/></svg> CinemaScope 2.39:1 Frame</span>
-                                <span>90 Sec Short</span>
-                            </div>
-                            <div class="w-full relative rounded-xl overflow-hidden bg-black border border-border shadow-2xl" style="padding-top: 41.84%;">
-                                <iframe src="${entry.videoEmbedUrl}" title="Life in Brunei" class="absolute top-0 left-0 w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    ` : ''}
+                    ${entry.videoSlot ? renderVideoFrame(entry) : ''}
 
                     <div class="prose prose-invert max-w-none text-text space-y-5 leading-relaxed font-sans text-base">
                         ${entry.content}
